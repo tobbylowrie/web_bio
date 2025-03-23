@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="800px" height="800px" viewBox="0 0 800 800" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Logo</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#7F4E2D" offset="0%"></stop>
+            <stop stop-color="#A7825F" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Logo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" fill="url(#linearGradient-1)" cx="400" cy="400" r="400"></circle>
+        <text id="L" font-family="Arial-BoldMT, Arial" font-size="500" font-weight="bold" fill="#FFFFFF">
+            <tspan x="240" y="550">L</tspan>
+        </text>
+    </g>
+</svg>

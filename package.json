@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "typed.js": "^2.1.0",
+    "vitepress": "^1.6.3"
+  },
+  "dependencies": {
+    "bootstrap": "^4.5.0"
+  }
+}
