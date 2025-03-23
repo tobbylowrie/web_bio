@@ -4,8 +4,6 @@ import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import './style.css'
 import MyHero from './components/MyHero.vue'
-// 引入 bootstrap CSS
-// import 'bootstrap/dist/css/bootstrap.css'
 
 export default {
   extends: DefaultTheme,

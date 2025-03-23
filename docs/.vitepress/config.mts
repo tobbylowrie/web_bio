@@ -4,12 +4,15 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "TobbyLowrie HomePage",
   description: "A VitePress Site",
+  head: [
+    ['link', { rel: 'icon', href: '/icon.ico' }]
+  ],
   // 设置自定义首页
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      { text: 'Home', link: '/' }
+      // { text: 'Examples', link: '/markdown-examples' }
     ],
 
     sidebar: [
@@ -23,7 +26,8 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: 'https://github.com/tobbylowrie/' },
+      { icon: 'github', link: 'https://github.com/tobbylowrie/' }
     ]
   }
 })
