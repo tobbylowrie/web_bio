@@ -27,7 +27,6 @@ export default defineConfig({
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/tobbylowrie/' },
-      { icon: 'github', link: 'https://github.com/tobbylowrie/' }
     ]
   }
 })
