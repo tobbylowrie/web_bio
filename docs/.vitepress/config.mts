@@ -7,12 +7,13 @@ export default defineConfig({
   head: [
     ['link', { rel: 'icon', href: '/icon.ico' }]
   ],
+  lastUpdated: true,
   // 设置自定义首页
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Home', link: '/' }
-      // { text: 'Examples', link: '/markdown-examples' }
+      { text: 'Home', link: '/' },
+      { text: '博客', link: '/blogs' },
     ],
 
     sidebar: [
@@ -24,7 +25,6 @@ export default defineConfig({
         ]
       }
     ],
-
     socialLinks: [
       { icon: 'github', link: 'https://github.com/tobbylowrie/' },
     ]

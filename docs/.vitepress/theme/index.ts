@@ -4,6 +4,7 @@ import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import './style.css'
 import MyHero from './components/MyHero.vue'
+import MyCustomLayout from './MyCustomLayout.vue'
 
 export default {
   extends: DefaultTheme,
@@ -12,7 +13,7 @@ export default {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
     })
   },
-  enhanceApp({ app, router, siteData }) {
+  enhanceApp({ app }) {
     // 注册全局组件
     app.component('MyHero', MyHero)
     
