@@ -8,7 +8,7 @@
         <h1 class="title-text mt-3"><strong><span id="title"></span></strong></h1>
         <p class="discribe-text mt-1"><span id="desc"></span></p>
         <ul class="links">
-          <li class="links-item"><a class="btn" href="https://blog.tobbylowrie.com" type="button">
+          <li class="links-item"><a class="btn" href="https://tobbylowrie.com/blogs" type="button">
               visit my blog</a></li>
           <li class="links-item">
             <a class="btn" href="https://github.com/tobbylowrie/" type="button">
