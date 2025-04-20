@@ -1,12 +1,19 @@
 import { defineConfig } from 'vitepress'
+import mk from '@iktakahiro/markdown-it-katex'
+import katex from 'katex'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "TobbyLowrie Blog",
   description: "TobbyLowrie Blog",
   head: [
-    ['link', { rel: 'icon', href: '/icon.ico' }]
+    ['link', { rel: 'icon', href: '/icon.ico' },],
   ],
+  markdown: {
+    config: (md) => {
+      md.use(mk,{katex})
+    }
+  },
   themeConfig: {
     darkModeSwitchLabel: '深色模式', // 修改开关标签为中文
     darkModeSwitchTitle: '切换深色/浅色模式', // 修改鼠标悬停提示

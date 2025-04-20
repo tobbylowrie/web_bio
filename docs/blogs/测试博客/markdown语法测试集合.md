@@ -139,3 +139,23 @@ for (var i=0; i<100; i++) {
 
 https://guides.github.com/features/mastering-markdown/  
 https://help.github.com/articles/basic-writing-and-formatting-syntax/  
+
+# 公式
+行内公式 $f(x)$  
+公式块
+$$
+a=b
+$$
+
+$$
+\begin{pmatrix}
+a&b\\
+c&d
+\end{pmatrix}
+$$
+
+复杂公式
+$$
+\lim_{x \to 0} \frac{\sin x}{x} = 1 \\
+\lim_{x \to +\infty} (1 + \frac{1}{x})^x = e
+$$

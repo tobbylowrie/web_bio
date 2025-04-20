@@ -2,9 +2,16 @@
 import { h } from 'vue'
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
+
+// 引入全局 CSS
 import './style.css'
+
+// 引入自定义组件
 import MyHero from './components/MyHero.vue'
 import RecentPosts from './components/RecentPosts.vue'
+
+// 引入模块 CSS
+import 'katex/dist/katex.min.css'
 
 export default {
   extends: DefaultTheme,
