@@ -24,7 +24,7 @@ const formatDate = (dateString) => {
 // 当前页数
 const currentPage = ref(1)
 // 每页文章数
-const postsPerPage = 1
+const postsPerPage = 10
 
 // 修改后的排序函数
 const sortedPosts = computed(() => {

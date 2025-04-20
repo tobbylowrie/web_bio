@@ -8,6 +8,8 @@ export default defineConfig({
     ['link', { rel: 'icon', href: '/icon.ico' }]
   ],
   themeConfig: {
+    darkModeSwitchLabel: '深色模式', // 修改开关标签为中文
+    darkModeSwitchTitle: '切换深色/浅色模式', // 修改鼠标悬停提示
     nav: [
       { text: '首页', link: '/' },
       { text: '博客', link: '/blogs' },
