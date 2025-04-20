@@ -20,13 +20,22 @@ export default defineConfig({
       }
     },
     sidebar: {
-      '/blogs/': [
+      '/blogs/测试博客': [
         {
-          text: '博客文章',
+          text: '测试博客',
           items: [
-            { text: '测试博客2', link: '/blogs/测试博客2' },
-            { text: '测试博客3', link: '/blogs/测试博客3' },
-            { text: '第一篇博客', link: '/blogs/第一篇博客' }
+            { text: '测试博客2', link: '/blogs/测试博客/测试博客2' },
+            { text: '测试博客3', link: '/blogs/测试博客/测试博客3' },
+            { text: 'MarkDown 语法测试', link: '/blogs/测试博客/markdown语法测试集合.md' }
+            // { text: '第一篇博客', link: '/blogs/第一篇博客' }
+          ]
+        }
+      ],
+      '/blogs/折腾树莓派': [
+        {
+          text: '折腾树莓派',
+          items: [
+            { text: '配置树莓派 Zero 2W 的 USB 口为虚拟串口 (ttyGS0)', link: 'docs/blogs/折腾树莓派/配置树莓派 Zero 2W 的 USB 口为虚拟串口 (ttyGS0).md'}
           ]
         }
       ]

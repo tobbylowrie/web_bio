@@ -1,7 +1,9 @@
 ---
 sidebar: false
-layout: page
+layout: home
 title: 博客文章列表
-isIndex: true
+hide: true
 ---
+
+# 所有文章
 <RecentPosts />
