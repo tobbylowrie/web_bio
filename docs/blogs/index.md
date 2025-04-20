@@ -1,5 +1,7 @@
 ---
-layout: home
+sidebar: false
+layout: page
+title: 博客文章列表
+isIndex: true
 ---
-
-# 最近的博文
+<RecentPosts />
