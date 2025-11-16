@@ -44,7 +44,7 @@ export default defineConfig({
         {
           text: '折腾树莓派',
           items: [
-            { text: '配置树莓派 Zero 2W 的 USB 口为虚拟串口 (ttyGS0)', link: 'docs/blogs/折腾树莓派/配置树莓派 Zero 2W 的 USB 口为虚拟串口 (ttyGS0).md'}
+            { text: '配置树莓派 Zero 2W 的 USB 口为虚拟串口 (ttyGS0)', link: '/blogs/折腾树莓派/配置树莓派 Zero 2W 的 USB 口为虚拟串口 (ttyGS0).md'}
           ]
         }
       ]

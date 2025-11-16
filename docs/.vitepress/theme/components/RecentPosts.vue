@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { data as posts } from './posts.data.ts'
+import recentPostsConfig from '../config/recentPostsConfig'
 
 // 修改后的日期格式化函数
 const formatDate = (dateString) => {
@@ -21,10 +22,11 @@ const formatDate = (dateString) => {
   }).replace(/\//g, '/')
 }
 
+
 // 当前页数
 const currentPage = ref(1)
-// 每页文章数
-const postsPerPage = 10
+// 从配置文件获取每页文章数
+const postsPerPage = ref(recentPostsConfig.postsPerPage)
 
 // 修改后的排序函数
 const sortedPosts = computed(() => {
@@ -39,14 +41,14 @@ const sortedPosts = computed(() => {
 
 // 计算当前页的文章
 const paginatedPosts = computed(() => {
-  const start = (currentPage.value - 1) * postsPerPage
-  const end = currentPage.value * postsPerPage
+  const start = (currentPage.value - 1) * postsPerPage.value
+  const end = currentPage.value * postsPerPage.value
   return sortedPosts.value.slice(start, end)
 })
 
 // 总页数
 const totalPages = computed(() => {
-  return Math.ceil(sortedPosts.value.length / postsPerPage)
+  return Math.ceil(sortedPosts.value.length / postsPerPage.value)
 })
 
 // 切换到下一页
