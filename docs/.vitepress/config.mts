@@ -1,6 +1,15 @@
 import { defineConfig } from 'vitepress'
 import mk from '@iktakahiro/markdown-it-katex'
 import katex from 'katex'
+import { RSSOptions, RssPlugin } from 'vitepress-plugin-rss'
+
+// RSS 订阅插件配置
+const baseUrl = 'https://space.tobbylowrie.com'
+const RSS: RSSOptions = {
+  title: 'TobbyLowrie Blog',
+  baseUrl,
+  copyright: 'Copyright © 2025, TobbyLowrie',
+}
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -52,5 +61,8 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/tobbylowrie/' },
     ]
+  },
+    vite: {
+      plugins: [RssPlugin(RSS)]
   }
 })
