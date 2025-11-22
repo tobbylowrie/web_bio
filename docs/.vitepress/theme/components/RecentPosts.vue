@@ -290,7 +290,7 @@ onUnmounted(() => {
 }
 
 .post-group {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .group-header {
@@ -358,7 +358,7 @@ onUnmounted(() => {
 /* 搜索关键词高亮样式 */
 :deep(mark) {
   background-color: var(--vp-c-brand-soft);
-  color: var(--vp-c-brand-dark);
+  color: var(--vp-c-brand-1);
   padding: 0.1rem 0.2rem;
   border-radius: 2px;
   font-weight: 500;
@@ -374,7 +374,7 @@ onUnmounted(() => {
 
 .posts-container {
   margin: 0 0;
-  padding: 2rem 0;
+  /* padding: 2rem 0; */
 }
 
 .posts-list {
@@ -394,7 +394,7 @@ onUnmounted(() => {
 }
 
 .post-content-wrapper {
-  padding: 0.75rem 1rem;
+  padding: 0rem 1rem;
   transition: all 0.3s ease;
 }
 
@@ -436,19 +436,20 @@ onUnmounted(() => {
 }
 
 .post-tags {
-  margin-top: 0.5rem;
+  /* margin-top: 0.5rem; */
   display: flex;
   flex-wrap: wrap;
   gap: 0.25rem;
-  padding-left: 0.25rem;
+  padding-bottom: 0.25rem;
+  /* padding-left: 0.25rem; */
 }
 
 .post-tag {
   display: inline-block;
-  padding: 0.125rem 0.5rem;
+  padding: 0rem 0.5rem;
   font-size: 0.75rem;
   color: var(--vp-c-brand);
-  background-color: var(--vp-c-brand-soft);
+  /* background-color: var(--vp-c-brand-soft); */
   border-radius: 12px;
   border: 1px solid var(--vp-c-brand);
   transition: all 0.2s ease;
@@ -463,11 +464,10 @@ onUnmounted(() => {
 
 /* 高亮状态下的标签样式 */
 :deep(.post-tag mark) {
-  background: none;
+  /* background: none; */
   color: inherit;
-  font-weight: 600;
+  font-weight: 800;
 }
-
 
 /* 分页样式已移除，因为分组显示更适合文章浏览 */
 </style>

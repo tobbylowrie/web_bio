@@ -5,6 +5,7 @@ description: 通过利用AI工具将2D角色转换为3D模型
 author: 深韩
 sidebar: false
 layout: doc
+tags: [AI生成,3D模型,教程]
 ---
 
 # 通过AI进行角色的3D模型生成

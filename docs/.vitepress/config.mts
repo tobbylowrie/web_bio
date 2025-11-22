@@ -11,8 +11,8 @@ import { rssConfig } from './config/rss'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "TobbyLowrie Blog",
-  description: "TobbyLowrie Blog",
+  title: "深韩的个人主页",
+  description: "深韩的个人主页",
   head: [
     ['link', { rel: 'icon', href: '/icon.ico' }],
     ['link', { rel: 'apple-touch-icon', href: '/avatar.png' }],

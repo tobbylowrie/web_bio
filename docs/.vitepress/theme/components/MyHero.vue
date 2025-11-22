@@ -8,11 +8,11 @@
         <h1 class="title-text mt-3"><strong><span id="title"></span></strong></h1>
         <p class="discribe-text mt-1"><span id="desc"></span></p>
         <ul class="links">
-          <li class="links-item"><a class="btn" href="https://tobbylowrie.com/blogs" type="button">
-              visit my blog</a></li>
+          <li class="links-item"><a class="btn" href="https://blog.tobbylowrie.com/blogs" type="button">
+              博客文章列表</a></li>
           <li class="links-item">
             <a class="btn" href="https://github.com/tobbylowrie/" type="button">
-              github
+              github主页
             </a>
           </li>
         </ul>
@@ -104,7 +104,7 @@ p {
   color: var(--text-primary);
   background-color: transparent;
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 3.4rem;
+  font-size: 2rem;
   padding: 5px 15px;
   border-radius: 10px;
   text-shadow:
@@ -117,7 +117,7 @@ p {
 
 /* 标题光标样式 */
 #title+.typed-cursor {
-  font-size: 3.4rem;
+  font-size: 2rem;
   color: var(--text-primary);
   position: relative;
   margin-left: 5px;
@@ -235,9 +235,9 @@ import { onMounted } from 'vue'
 import Typed from 'typed.js'
 
 // 统一设置光标消失延迟时间
-const cursorDelay = 1 * 1000;
+
 // 设置光标显示字符
-const cursorChar = '_';
+const cursorChar = '|';
 
 onMounted(() => {
   // 图片动画
@@ -251,14 +251,14 @@ onMounted(() => {
     buttons.forEach((button, index) => {
       setTimeout(() => {
         button.classList.add('show');
-      }, 2500 + (index * 200)); // 在打字效果后显示，每个按钮间隔200ms
+      }, 2000 + (index * 200)); // 在打字效果后显示，每个按钮间隔200ms
     });
   }, 100);
 
   // 文字打字机效果
   setTimeout(() => {
     new Typed('#title', {
-      strings: ["Hey, I'm TobbyLowrie"],
+      strings: ["你好, 我是深韩"],
       typeSpeed: 50,
       showCursor: true,
       cursorChar: cursorChar,
@@ -266,11 +266,11 @@ onMounted(() => {
         // 3秒后隐藏光标
         setTimeout(() => {
           document.querySelector('.typed-cursor').style.display = 'none';
-        }, cursorDelay);
+        }, 1000);
 
         // 标题完成后开始描述文字
         new Typed('#desc', {
-          strings: ["A html web desgin lover, building things with love."],
+          strings: ["欢迎你来到我的个人主页"],
           typeSpeed: 40,
           showCursor: true,
           cursorChar: cursorChar,
@@ -278,7 +278,7 @@ onMounted(() => {
             // 3秒后隐藏第二个光标
             setTimeout(() => {
               document.querySelectorAll('.typed-cursor')[1].style.display = 'none';
-            }, cursorDelay);
+            }, 3*1000);
           }
         });
       }
