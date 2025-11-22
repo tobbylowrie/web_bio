@@ -1,8 +1,8 @@
 ---
 title: 配置树莓派 Zero 2W 的 USB 口为虚拟串口 (ttyGS0)
-date: 2024-04-20 13:00:00
+date: 2024-04-20
 description: 无
-tags: [PRI,Raspberry,Raspberry Zero 2W]
+tags: [树莓派,Raspberry,Raspberry Zero 2W,硬件]
 ---
 
 # 配置树莓派 Zero 2W 的 USB 口为虚拟串口 (ttyGS0)

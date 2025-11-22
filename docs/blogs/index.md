@@ -6,4 +6,5 @@ hide: true
 ---
 
 # 所有文章
+
 <RecentPosts />
