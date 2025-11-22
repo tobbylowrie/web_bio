@@ -26,9 +26,9 @@ const formatYearMonth = (dateString) => {
 
   // 获取年、月并格式化
   const year = date.getFullYear()
-  const month = date.toLocaleDateString('zh-CN', { month: 'long' })
+  const month = String(date.getMonth() + 1).padStart(2, '0')
 
-  return `${year}年${month}`
+  return `${year}年${month}月`
 }
 
 
@@ -192,8 +192,13 @@ onUnmounted(() => {
         </div>
         <ul class="posts-list">
           <li v-for="post in group.posts" :key="post.url" class="post-item">
-            <div class="post-content">
-              <a :href="post.url" class="post-link" v-html="highlightText(post.frontmatter.title, searchQuery)"></a>
+            <div class="post-content-wrapper">
+              <a :href="post.url" class="post-link-wrapper">
+                <div class="post-content">
+                  <div class="post-title" v-html="highlightText(post.frontmatter.title, searchQuery)"></div>
+                  <span class="post-date">{{ formatDate(post.frontmatter.date) }}</span>
+                </div>
+              </a>
               <!-- 标签显示 -->
               <div v-if="post.frontmatter.tags && post.frontmatter.tags.length > 0" class="post-tags">
                 <span
@@ -206,7 +211,6 @@ onUnmounted(() => {
                 ></span>
               </div>
             </div>
-            <span class="post-date">{{ formatDate(post.frontmatter.date) }}</span>
           </li>
         </ul>
       </div>
@@ -286,7 +290,7 @@ onUnmounted(() => {
 }
 
 .post-group {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .group-header {
@@ -294,15 +298,16 @@ onUnmounted(() => {
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 1rem;
-  margin-bottom: 0.5rem;
-  background-color: var(--vp-c-bg-soft);
-  border-left: 4px solid var(--vp-c-brand);
-  border-radius: 6px;
+  /* margin-bottom: 0.5rem; */
+  /* background-color: var(--vp-c-bg-soft); */
+  /* border-left: 4px solid var(--vp-c-brand); */
+  border-bottom: 1px solid var(--vp-c-divider);
+  /* border-radius: 6px; */
 }
 
 .group-title {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: var(--vp-c-text-1);
 }
@@ -380,41 +385,62 @@ onUnmounted(() => {
 
 .post-item {
   margin: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 0.75rem 1rem;
+  padding: 0;
   border-bottom: 1px solid var(--vp-c-divider);
-  transition: all 0.3s ease;
-}
-
-.post-item:hover {
-  background-color: var(--vp-c-bg-soft);
-  transform: translateX(5px);
-  transition: 0.3s;
 }
 
 .post-item:last-child {
   border-bottom: none;
 }
 
+.post-content-wrapper {
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.post-link-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: var(--vp-c-text-1);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.post-content-wrapper:hover{
+  background-color: var(--vp-c-bg-soft);
+  transform: translateX(5px);
+  color: #dd1313;
+}
+
 .post-content {
   flex: 1;
-  margin-right: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.25rem 0;
 }
 
 .post-date {
   color: var(--vp-c-text-2);
   font-size: 0.9rem;
   white-space: nowrap;
-  align-self: center;
+  margin-left: 1rem;
+}
+
+.post-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--vp-c-text-1);
+  flex: 1;
 }
 
 .post-tags {
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.25rem;
+  padding-left: 0.25rem;
 }
 
 .post-tag {
@@ -442,22 +468,6 @@ onUnmounted(() => {
   font-weight: 600;
 }
 
-.post-item:hover {
-  background-color: var(--vp-c-bg-soft);
-  transform: translateX(5px);
-  transition: 0.3s;
-}
-
-.post-link {
-  color: var(--vp-c-text-1);
-  text-decoration: none;
-  font-size: 1.1rem;
-  transition: color 0.3s;
-}
-
-.post-link:hover {
-  color: var(--vp-c-brand);
-}
 
 /* 分页样式已移除，因为分组显示更适合文章浏览 */
 </style>
