@@ -3,7 +3,7 @@
     <div class="rotating-background"></div>
     <div class="content-wrapper">
       <a href="https://github.com/tobbylowrie/"><img class="img-fluid" src="/avatar.png" alt="lowrie-logo"
-          width="200px"></a>
+          width="200px" loading="lazy" decoding="async"></a>
       <div class="text-wrapper">
         <h1 class="title-text mt-3"><strong><span id="title"></span></strong></h1>
         <p class="discribe-text mt-1"><span id="desc"></span></p>
