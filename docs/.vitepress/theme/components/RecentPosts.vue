@@ -175,11 +175,6 @@ onUnmounted(() => {
           ✕
         </button>
       </div>
-
-      <!-- 搜索结果统计 -->
-      <div v-if="searchQuery" class="search-results-info">
-        找到 {{ searchResultsCount }} 篇相关文章
-      </div>
     </div>
     <!-- 文章列表或空状态提示 -->
     <div v-if="searchResultsCount === 0 && searchQuery" class="no-results">
@@ -303,7 +298,6 @@ onUnmounted(() => {
   background-color: var(--vp-c-bg-soft);
   border-left: 4px solid var(--vp-c-brand);
   border-radius: 6px;
-  border-bottom: 2px solid var(--vp-c-divider);
 }
 
 .group-title {
@@ -341,7 +335,7 @@ onUnmounted(() => {
 
 .no-results-icon {
   font-size: 3rem;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
   opacity: 0.6;
 }
 
@@ -392,7 +386,6 @@ onUnmounted(() => {
   padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--vp-c-divider);
   transition: all 0.3s ease;
-  border-radius: 4px;
 }
 
 .post-item:hover {
