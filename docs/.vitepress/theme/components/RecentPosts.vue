@@ -84,6 +84,26 @@ const prevPage = () => {
 </template>
 
 <style scoped>
+.search-container {
+  margin-bottom: 1rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 4px;
+  font-size: 1rem;
+  color: var(--vp-c-text-1);
+  background-color: var(--vp-c-bg);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--vp-c-brand);
+  box-shadow: 0 0 0 2px var(--vp-c-brand-soft);
+}
+
 
 .posts-title {
   font-size: 1.8rem;

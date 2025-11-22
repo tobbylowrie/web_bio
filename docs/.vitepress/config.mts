@@ -1,35 +1,59 @@
 import { defineConfig } from 'vitepress'
 import mk from '@iktakahiro/markdown-it-katex'
 import katex from 'katex'
-import { RSSOptions, RssPlugin } from 'vitepress-plugin-rss'
+import { RssPlugin } from 'vitepress-plugin-rss'
 
-// RSS 订阅插件配置
-const baseUrl = 'https://space.tobbylowrie.com'
-const RSS: RSSOptions = {
-  title: 'TobbyLowrie Blog',
-  baseUrl,
-  copyright: 'Copyright © 2025, TobbyLowrie',
-}
+// 导入模块化配置
+import { navConfig } from './config/nav'
+import { defaultSidebar } from './config/sidebar'
+import { socialConfig } from './config/social'
+import { rssConfig } from './config/rss'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "TobbyLowrie Blog",
   description: "TobbyLowrie Blog",
   head: [
-    ['link', { rel: 'icon', href: '/icon.ico' },],
+    ['link', { rel: 'icon', href: '/icon.ico' }],
+    ['link', { rel: 'apple-touch-icon', href: '/avatar.png' }],
+    ['meta', { name: 'description', content: 'TobbyLowrie 技术博客' }],
+    ['meta', { name: 'keywords', content: '技术博客,Docker,树莓派,PVE,AI,编程,开发' }],
+    ['meta', { name: 'author', content: 'TobbyLowrie' }],
+    ['meta', { name: 'theme-color', content: '#874fd6' }],
+    ['meta', { property: 'og:title', content: 'TobbyLowrie Blog' }],
+    ['meta', { property: 'og:description', content: '分享技术实践与学习笔记' }],
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:url', content: 'https://space.tobbylowrie.com' }],
+    ['meta', { property: 'og:image', content: 'https://space.tobbylowrie.com/avatar.png' }],
+    ['meta', { property: 'og:site_name', content: 'TobbyLowrie Blog' }],
+    ['meta', { property: 'og:locale', content: 'zh_CN' }],
+    ['meta', { name: 'twitter:card', content: 'summary' }],
+    ['meta', { name: 'twitter:title', content: 'TobbyLowrie Blog' }],
+    ['meta', { name: 'twitter:description', content: '分享技术实践与学习笔记' }],
+    ['meta', { name: 'twitter:image', content: 'https://space.tobbylowrie.com/avatar.png' }],
+    ['script', { type: 'application/ld+json' }, `
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "TobbyLowrie",
+        "url": "https://space.tobbylowrie.com",
+        "image": "https://space.tobbylowrie.com/avatar.png",
+        "sameAs": [
+          "https://github.com/tobbylowrie/"
+        ],
+        "description": "技术博客作者，分享技术实践与学习笔记"
+      }
+    `],
   ],
   markdown: {
     config: (md) => {
-      md.use(mk,{katex})
+      md.use(mk, { katex })
     }
   },
   themeConfig: {
     darkModeSwitchLabel: '深色模式', // 修改开关标签为中文
     darkModeSwitchTitle: '切换深色/浅色模式', // 修改鼠标悬停提示
-    nav: [
-      { text: '首页', link: '/' },
-      { text: '博客', link: '/blogs' },
-    ],
+    nav: navConfig,
     lastUpdated: {
       text: '最后更新日期',
       formatOptions: {
@@ -37,32 +61,10 @@ export default defineConfig({
         timeStyle: 'short'
       }
     },
-    sidebar: {
-      '/blogs/测试博客': [
-        {
-          text: '测试博客',
-          items: [
-            { text: '测试博客2', link: '/blogs/测试博客/测试博客2' },
-            { text: '测试博客3', link: '/blogs/测试博客/测试博客3' },
-            { text: 'MarkDown 语法测试', link: '/blogs/测试博客/markdown语法测试集合.md' }
-            // { text: '第一篇博客', link: '/blogs/第一篇博客' }
-          ]
-        }
-      ],
-      '/blogs/折腾树莓派': [
-        {
-          text: '折腾树莓派',
-          items: [
-            { text: '配置树莓派 Zero 2W 的 USB 口为虚拟串口 (ttyGS0)', link: '/blogs/折腾树莓派/配置树莓派 Zero 2W 的 USB 口为虚拟串口 (ttyGS0).md'}
-          ]
-        }
-      ]
-    },
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/tobbylowrie/' },
-    ]
+    sidebar: defaultSidebar,
+    socialLinks: socialConfig
   },
-    vite: {
-      plugins: [RssPlugin(RSS)]
+  vite: {
+    plugins: [RssPlugin(rssConfig)]
   }
 })
