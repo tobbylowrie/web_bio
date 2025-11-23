@@ -9,6 +9,8 @@ import './style.css'
 // 引入自定义组件
 import MyHero from './components/MyHero.vue'
 import RecentPosts from './components/RecentPosts.vue'
+import BackToTop from './components/BackToTop.vue'
+import AsideOutlineAfter from './components/aside-outline-after.vue'
 
 // 引入模块 CSS
 import 'katex/dist/katex.min.css'
@@ -18,13 +20,14 @@ export default {
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
-      
+      'aside-outline-after': () => h(AsideOutlineAfter)
     })
   },
   enhanceApp({ app }) {
     // 注册全局组件
     app.component('MyHero', MyHero)
-    app.component('RecentPosts' ,RecentPosts)
+    app.component('RecentPosts', RecentPosts)
+    app.component('BackToTop', BackToTop)
     
     // 如果在客户端，添加typed.js脚本
     if (typeof window !== 'undefined') {
