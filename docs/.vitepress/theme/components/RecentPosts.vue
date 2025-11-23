@@ -15,7 +15,8 @@ const formatDate = (dateString) => {
   const month = String(date.getMonth() + 1).padStart(2, '0')
   const day = String(date.getDate()).padStart(2, '0')
 
-  return `${year}年${month}月${day}日`
+  // return `${year}年${month}月${day}日`
+  return `${month}/${day}`
 }
 
 // 格式化年月（用于分组）
@@ -113,6 +114,11 @@ const clearSearch = () => {
   searchQuery.value = ''
 }
 
+// 点击链接处理导航
+const handleLinkClick = (url) => {
+  window.open(url, '_blank')
+}
+
 // 点击标签进行搜索
 const searchByTag = (tag) => {
   searchQuery.value = tag
@@ -193,23 +199,23 @@ onUnmounted(() => {
         <ul class="posts-list">
           <li v-for="post in group.posts" :key="post.url" class="post-item">
             <div class="post-content-wrapper">
-              <a :href="post.url" class="post-link-wrapper">
+              <a class="post-link-wrapper" @click="handleLinkClick(post.url)">
                 <div class="post-content">
-                  <div class="post-title" v-html="highlightText(post.frontmatter.title, searchQuery)"></div>
+                  <div class="post-title-tags">
+                    <div class="post-title" v-html="highlightText(post.frontmatter.title, searchQuery)"></div>
+                    <span></span>
+                    <template v-for="tag in post.frontmatter.tags" :key="tag">
+                      <div
+                        class="post-tag"
+                        v-html="highlightText(tag, searchQuery)"
+                        @click.stop="searchByTag(tag)"
+                        :title="`点击搜索标签: ${tag}`"
+                      ></div>
+                    </template>
+                  </div>
                   <span class="post-date">{{ formatDate(post.frontmatter.date) }}</span>
                 </div>
               </a>
-              <!-- 标签显示 -->
-              <div v-if="post.frontmatter.tags && post.frontmatter.tags.length > 0" class="post-tags">
-                <span
-                  v-for="tag in post.frontmatter.tags"
-                  :key="tag"
-                  class="post-tag"
-                  v-html="highlightText(tag, searchQuery)"
-                  @click="searchByTag(tag)"
-                  :title="`点击搜索标签: ${tag}`"
-                ></span>
-              </div>
             </div>
           </li>
         </ul>
@@ -405,6 +411,7 @@ onUnmounted(() => {
   color: var(--vp-c-text-1);
   text-decoration: none;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .post-content-wrapper:hover{
@@ -428,32 +435,32 @@ onUnmounted(() => {
   margin-left: 1rem;
 }
 
-.post-title {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: var(--vp-c-text-1);
+.post-title-tags {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
   flex: 1;
+  min-width: 0;
+  flex-wrap: wrap;
 }
 
-.post-tags {
-  /* margin-top: 0.5rem; */
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem;
-  padding-bottom: 0.25rem;
-  /* padding-left: 0.25rem; */
+.post-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--vp-c-text-1);
 }
 
 .post-tag {
+  position: relative;
   display: inline-block;
   padding: 0rem 0.5rem;
   font-size: 0.75rem;
   color: var(--vp-c-brand);
-  /* background-color: var(--vp-c-brand-soft); */
-  border-radius: 12px;
   border: 1px solid var(--vp-c-brand);
+  border-radius: 12px;
   transition: all 0.2s ease;
   cursor: pointer;
+  flex-shrink: 0; /* 标签不缩小 */
 }
 
 .post-tag:hover {

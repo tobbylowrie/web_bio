@@ -32,9 +32,17 @@ export const raspberryPiSidebar = createSidebar('折腾树莓派', [
 ]);
 
 /**
+ * HomeAssistant 侧边栏配置
+ */
+export const homeAssistantSidebar = createSidebar('折腾 HomeAssistant', [
+  { text: '01 安装', link: '/blogs/折腾HomeAssistant/安装.md' }
+]);
+
+/**
  * 默认侧边栏配置
  */
 export const defaultSidebar: Record<string, SidebarGroup[]> = {
   '/blogs/测试博客': testBlogSidebar,
-  '/blogs/折腾树莓派': raspberryPiSidebar
+  '/blogs/折腾树莓派': raspberryPiSidebar,
+  '/blogs/折腾HomeAssistant': homeAssistantSidebar
 };

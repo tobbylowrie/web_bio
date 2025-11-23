@@ -12,6 +12,7 @@ import { seoConfig } from './config/seo'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  srcExclude: ['blogs/测试博客/**'],
   title: seoConfig.title,
   description: seoConfig.description,
   head: seoConfig.head,
@@ -32,7 +33,13 @@ export default defineConfig({
       }
     },
     sidebar: defaultSidebar,
-    socialLinks: socialConfig
+    socialLinks: socialConfig,
+    outline: [2, 4], // 显示从 h2 到 h4 的标题
+    outlineTitle: '本页目录',
+    returnToTopLabel: '返回顶部',
+    sidebarMenuLabel: '菜单',
+    skipToContentLabel: '跳到内容',
+    langMenuLabel: '切换语言'
   },
   vite: {
     plugins: [RssPlugin(rssConfig)]

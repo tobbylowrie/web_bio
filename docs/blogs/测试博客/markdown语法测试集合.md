@@ -1,6 +1,8 @@
 ---
 title: MarkDown 语法测试
 date: 2024-04-20 00:00:00
+hide: true
+tags: [test]
 ---
 这篇文章包含markdown语法基本的内容, 目的是放在自己的博客园上, 通过开发者控制台快速选中,  
 从而自定义自己博客园markdown样式.当然本文也可以当markdown语法学习之用.  
