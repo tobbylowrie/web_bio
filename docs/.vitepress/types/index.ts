@@ -81,4 +81,16 @@ export interface RSSOptions {
   title: string;
   baseUrl: string;
   copyright: string;
+  author?: {
+    name: string;
+    email?: string;
+    link?: string;
+  };
+  authors?: Array<{
+    name: string;
+    email?: string;
+    link?: string;
+  }>;
+  description?: string;
+  language?: string;
 }
