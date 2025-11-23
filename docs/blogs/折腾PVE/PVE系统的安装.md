@@ -29,23 +29,23 @@ PVE版本：proxmox-ve_8.4-1.iso
 
 从 pve_source 官方下载脚本文件，并按教程解压运行脚本
 
-![alt text](image.png)
+![alt text](/images/折腾PVE/image.png)
 
 2.2 移除 local-lvm，合并存储空间
 
 按照提示进行操作
-![alt text](image-1.png)
+![alt text](/images/折腾PVE/image-1.png)
 
 执行完脚本，并删除 `local-lvm` 后，需将原本分配给 `local-lvm` 的功能添加回 `local` 中
-![alt text](image-2.png)
+![alt text](/images/折腾PVE/image-2.png)
 
 2.3 开启 IOMMU，启用核显直通
 
-![alt text](image-3.png)
+![alt text](/images/折腾PVE/image-3.png)
 
 2.4 修复资源统计显示BUG
 
-![alt text](image-4.png)
+![alt text](/images/折腾PVE/image-4.png)
 
 删掉 `/var/lib/rrdcached/db` 里边的所有文件夹；这里是系统图表缓存文件，删了系统会自动重建新的  
 注意不要把 `db` 目录给删除，只删除里面的文件
