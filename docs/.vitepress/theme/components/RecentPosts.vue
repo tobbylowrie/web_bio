@@ -10,13 +10,11 @@ const formatDate = (dateString) => {
   // 检查日期是否有效
   if (isNaN(date.getTime())) return ''
 
-  // 获取年、月、日并格式化
-  const year = date.getFullYear()
-  const month = String(date.getMonth() + 1).padStart(2, '0')
+  // 获取日并格式化
   const day = String(date.getDate()).padStart(2, '0')
 
-  // return `${year}年${month}月${day}日`
-  return `${month}/${day}`
+  // 只显示日
+  return `${day}`
 }
 
 // 格式化年月（用于分组）
@@ -30,6 +28,19 @@ const formatYearMonth = (dateString) => {
   const month = String(date.getMonth() + 1).padStart(2, '0')
 
   return `${year}年${month}月`
+}
+
+// 格式化作者信息（支持单作者和多作者）
+const formatAuthor = (author) => {
+  if (!author) return ''
+
+  // 如果是数组格式（如 ["作者A", "作者B"]）
+  if (Array.isArray(author)) {
+    return author.join(', ')
+  }
+
+  // 如果是字符串格式（单作者），直接返回
+  return author
 }
 
 
@@ -213,7 +224,12 @@ onUnmounted(() => {
                       ></div>
                     </template>
                   </div>
-                  <span class="post-date">{{ formatDate(post.frontmatter.date) }}</span>
+                  
+                  <div class="post-meta">
+                    <span v-if="post.frontmatter.author" class="post-author">{{ formatAuthor(post.frontmatter.author) }}</span>
+                    <span class="post-separator">·</span>
+                    <span class="post-date">{{ formatDate(post.frontmatter.date) }}日</span>
+                  </div>
                 </div>
               </a>
             </div>
@@ -428,11 +444,30 @@ onUnmounted(() => {
   padding: 0.25rem 0;
 }
 
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.post-author {
+  color: var(--vp-c-text-3);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.post-separator {
+  color: var(--vp-c-text-3);
+  font-size: 0.85rem;
+  white-space: nowrap;
+  opacity: 0.6;
+}
+
 .post-date {
-  color: var(--vp-c-text-2);
+  color: var(--vp-c-text-3);
   font-size: 0.9rem;
   white-space: nowrap;
-  margin-left: 1rem;
+  /* margin-left: 1rem; */
 }
 
 .post-title-tags {
@@ -447,7 +482,7 @@ onUnmounted(() => {
 .post-title {
   font-size: 1rem;
   font-weight: 500;
-  color: var(--vp-c-text-1);
+  color: var(--vp-c-brand);
 }
 
 .post-tag {
@@ -455,8 +490,8 @@ onUnmounted(() => {
   display: inline-block;
   padding: 0rem 0.5rem;
   font-size: 0.75rem;
-  color: var(--vp-c-brand);
-  border: 1px solid var(--vp-c-brand);
+  color: var(--vp-c-text-3);
+  border: 1px solid var(--vp-c-text-3);
   border-radius: 12px;
   transition: all 0.2s ease;
   cursor: pointer;
@@ -465,6 +500,7 @@ onUnmounted(() => {
 
 .post-tag:hover {
   background-color: var(--vp-c-brand);
+  border: 1px solid var(--vp-c-brand);
   color: var(--vp-c-white);
   transform: scale(1.05);
 }
