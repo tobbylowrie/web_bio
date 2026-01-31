@@ -46,7 +46,7 @@ onBeforeUnmount(() => {
   border-radius: 7px;
   width: 3rem;
   height: 3rem;
-  background-color: hsl(0deg 0% 100% / 75%);
+  background-color: var(--vp-c-bg);
   color: var(--vp-c-brand);
   cursor: pointer;
   opacity: 0;
