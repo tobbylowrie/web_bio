@@ -1,12 +1,10 @@
 <template>
   <div class="aside-outline-after">
     <hr class="spacer"/>
-    <BackToTop />
   </div>
 </template>
 
 <script setup>
-import BackToTop from './BackToTop.vue'
 </script>
 
 <style scoped>

@@ -20,7 +20,8 @@ export default {
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
-      'aside-outline-after': () => h(AsideOutlineAfter)
+      'aside-outline-after': () => h(AsideOutlineAfter),
+      'layout-bottom': () => h(BackToTop)
     })
   },
   enhanceApp({ app }) {

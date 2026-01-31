@@ -58,6 +58,13 @@ onBeforeUnmount(() => {
   white-space: nowrap;
 }
 
+/* 全局样式 - 移动端支持 */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 1.5rem;
+}
+
 .back-to-top--visible {
   opacity: 1;
   transform: translateY(0);
