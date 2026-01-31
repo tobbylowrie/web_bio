@@ -5,7 +5,7 @@
     :aria-label="`返回顶部`"
     @click="scrollToTop"
   >
-  返回顶部
+  返回<br/>顶部
   </button>
 </template>
 
@@ -39,9 +39,12 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 1.5rem;
   border: 1px solid var(--vp-c-brand);
   border-radius: 7px;
-  width: 100%;
+  width: auto;
   background-color: transparent;
   color: var(--vp-c-brand);
   cursor: pointer;
@@ -49,7 +52,7 @@ onBeforeUnmount(() => {
   transform: translateY(0.5rem);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 100;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   padding: 0.5rem 0.75rem;
@@ -58,16 +61,10 @@ onBeforeUnmount(() => {
   white-space: nowrap;
 }
 
-/* 全局样式 - 移动端支持 */
-.back-to-top {
-  position: fixed;
-  bottom: 2rem;
-  right: 1.5rem;
-}
-
 .back-to-top--visible {
   opacity: 1;
   transform: translateY(0);
+  transition-delay: 0.5s;
 }
 
 .back-to-top:hover {
