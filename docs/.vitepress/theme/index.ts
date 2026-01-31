@@ -2,6 +2,10 @@
 import { h } from 'vue'
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
+import 'viewerjs/dist/viewer.min.css';
+import imageViewer from 'vitepress-plugin-image-viewer';
+import vImageViewer from 'vitepress-plugin-image-viewer/lib/vImageViewer.vue';
+import { useRoute } from 'vitepress';
 
 // 引入全局 CSS
 import './style.css'
@@ -21,7 +25,7 @@ export default {
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
       'aside-outline-after': () => h(AsideOutlineAfter),
-      'layout-bottom': () => h(BackToTop)
+      'doc-bottom': () => h(BackToTop)
     })
   },
   enhanceApp({ app }) {
@@ -29,6 +33,7 @@ export default {
     app.component('MyHero', MyHero)
     app.component('RecentPosts', RecentPosts)
     app.component('BackToTop', BackToTop)
+    app.component('vImageViewer', vImageViewer);
     
     // 如果在客户端，添加typed.js脚本
     if (typeof window !== 'undefined') {
@@ -37,5 +42,11 @@ export default {
       //   console.error('Failed to load typed.js:', e)
       // })
     }
-  }
+  },
+  setup() {
+        // 获取路由
+        const route = useRoute();
+        // 使用
+        imageViewer(route);
+    }
 } satisfies Theme

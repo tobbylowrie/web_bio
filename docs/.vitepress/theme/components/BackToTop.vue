@@ -39,20 +39,22 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .back-to-top {
-  position: fixed;
+  /* position: fixed; */
   bottom: 2rem;
   right: 1.5rem;
   border: 1px solid var(--vp-c-brand);
   border-radius: 7px;
-  width: auto;
-  background-color: transparent;
+  width: 3rem;
+  height: 3rem;
+  background-color: hsl(0deg 0% 100% / 75%);
   color: var(--vp-c-brand);
   cursor: pointer;
   opacity: 0;
-  transform: translateY(0.5rem);
+  visibility: hidden;
+  transform: translateY(1rem);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 100;
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   padding: 0.5rem 0.75rem;
@@ -61,8 +63,16 @@ onBeforeUnmount(() => {
   white-space: nowrap;
 }
 
+/* 移动端 - 固定定位 */
+@media (max-width: 768px) {
+  .back-to-top {
+    position: fixed;
+  }
+}
+
 .back-to-top--visible {
   opacity: 1;
+  visibility: visible;
   transform: translateY(0);
   transition-delay: 0.5s;
 }

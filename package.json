@@ -13,6 +13,7 @@
     "@iktakahiro/markdown-it-katex": "^4.0.1",
     "feed": "^5.2.0",
     "katex": "^0.16.28",
+    "vitepress-plugin-image-viewer": "^1.1.6",
     "vitepress-plugin-rss": "^0.4.2"
   }
 }
