@@ -39,7 +39,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .back-to-top {
-  /* position: fixed; */
+  position: fixed;
   bottom: 2rem;
   right: 1.5rem;
   border: 1px solid var(--vp-c-brand);
@@ -61,13 +61,6 @@ onBeforeUnmount(() => {
   font-size: 0.875rem;
   line-height: 1;
   white-space: nowrap;
-}
-
-/* 移动端 - 固定定位 */
-@media (max-width: 768px) {
-  .back-to-top {
-    position: fixed;
-  }
 }
 
 .back-to-top--visible {

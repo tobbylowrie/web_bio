@@ -11,9 +11,13 @@ import { useRoute } from 'vitepress';
 import './style.css'
 
 // 引入自定义组件
+// @ts-ignore: allow importing Vue SFCs without type declarations
 import MyHero from './components/MyHero.vue'
+// @ts-ignore: allow importing Vue SFCs without type declarations
 import RecentPosts from './components/RecentPosts.vue'
+// @ts-ignore: allow importing Vue SFCs without type declarations
 import BackToTop from './components/BackToTop.vue'
+// @ts-ignore: allow importing Vue SFCs without type declarations
 import AsideOutlineAfter from './components/aside-outline-after.vue'
 
 // 引入模块 CSS
@@ -24,7 +28,7 @@ export default {
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
-      'aside-outline-after': () => h(AsideOutlineAfter),
+      // 'aside-outline-after': () => h(AsideOutlineAfter),
       'doc-bottom': () => h(BackToTop)
     })
   },
