@@ -33,8 +33,7 @@ export default {
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
       // 'aside-outline-after': () => h(AsideOutlineAfter),
-      'doc-bottom': () => h(BackToTop),
-      'layout-bottom': () => h(HomeFooter)
+      'doc-bottom': () => h(BackToTop)
     })
   },
   enhanceApp({ app }) {

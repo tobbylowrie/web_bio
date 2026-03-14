@@ -6,4 +6,5 @@ import { NavItem } from '../types/index';
 export const navConfig: NavItem[] = [
   { text: '首页', link: '/' },
   { text: '博客', link: '/blogs' },
+  { text: '音乐', link: '/music' },
 ];

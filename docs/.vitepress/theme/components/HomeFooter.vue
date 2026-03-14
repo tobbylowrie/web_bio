@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isHome" class="home-footer">
+  <div class="home-footer">
     <!-- 版权信息及访问统计 -->
     <div v-if="copyright" class="footer-line">
       <span class="copyright">{{ copyright }}</span>
@@ -43,14 +43,10 @@ onMounted(() => {
 
 <style scoped>
 .home-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 12px 16px;
+  position: relative;
+  padding: 24px 16px 32px;
   text-align: center;
-  background: linear-gradient(to top, var(--vp-c-bg) 0%, transparent 100%);
-  z-index: 10;
+  background: var(--vp-c-bg);
 }
 
 .footer-line {
