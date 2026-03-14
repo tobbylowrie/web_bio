@@ -3,9 +3,59 @@ layout: home
 ---
 <MyHero />
 
-这是一段很长的测试文本。Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+# 这是一个扩展的测试博文
 
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+## 文字格式测试
+
+- **加粗文字**：这是加粗的文字。
+
+- *斜体文字*：这是斜体的文字。
+
+- ~~删除线文字~~：这是带有删除线的文字。
+
+- ==高亮文字==：这是高亮显示的文字（注意：不是所有Markdown解析器都支持高亮）。
+
+## 列表测试
+
+### 有序列表
+
+1. 第一项
+
+2. 第二项
+
+3. 第三项
+
+### 无序列表
+
+- 项目一
+
+- 项目二
+
+- 项目三
+
+## 链接和图片测试
+
+- [访问百度](https://www.baidu.com)
+
+- ![百度Logo](https://www.baidu.com/img/bd_logo1.png)
+
+## 代码块测试
+
+### 行内代码
+
+ ```
+ python is better than indent four spaces in this case
+ ```
+
+
+# 这是一段很长的测试文本。
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod 
+## tempor incididunt ut 
+labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+## Sed ut perspiciatis unde omnis 
+
+iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
 
 Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
 

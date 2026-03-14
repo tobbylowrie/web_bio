@@ -135,6 +135,7 @@ body {
 
 /* 旋转背景 */
 .rotating-background {
+  z-index: -99;
   position: fixed;
   top: -50%;
   left: -50%;
@@ -185,7 +186,8 @@ p {
   text-align: center;
   position: relative;
   padding: 20px;
-  margin-top: 10vh;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
 }
 
 .title-text {
