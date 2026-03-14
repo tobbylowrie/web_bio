@@ -37,15 +37,6 @@ export const seoConfig = {
       }
     `],
     // 不蒜子统计 - 用于展示访问数据
-    ['script', {
-      async: '',
-      src: 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'
-    }],
-    ['meta', { 
-      name: 'social-links', 
-      content: '[{"icon":"github","link":"https://github.com/tobbylowrie/"},{"icon":"rss","link":"/rss.xml"}]' }],
-    ['meta', { 
-      name: 'site-stats', 
-      content: 'true' }],
+    ['script', { async: '', src: 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js' }],
   ] as any,
 };

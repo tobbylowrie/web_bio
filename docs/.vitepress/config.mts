@@ -8,6 +8,7 @@ import { navConfig } from './config/nav'
 import { defaultSidebar } from './config/sidebar'
 import { rssConfig } from './config/rss'
 import { seoConfig } from './config/seo'
+import { socialConfig } from './config/social'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -32,7 +33,7 @@ export default defineConfig({
       }
     },
     sidebar: defaultSidebar,
-    // socialLinks: socialConfig,
+    socialLinks: socialConfig,
     outline: [2, 4], // 显示从 h2 到 h4 的标题
     outlineTitle: '本页目录',
     returnToTopLabel: '返回顶部',
