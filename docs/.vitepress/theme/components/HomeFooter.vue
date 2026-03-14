@@ -46,7 +46,6 @@ onMounted(() => {
   position: relative;
   padding: 24px 16px 32px;
   text-align: center;
-  background: var(--vp-c-bg);
 }
 
 .footer-line {
