@@ -21,6 +21,8 @@ import BackToTop from './components/BackToTop.vue'
 import AsideOutlineAfter from './components/aside-outline-after.vue'
 // @ts-ignore: allow importing Vue SFCs without type declarations
 import HomeFooter from './components/HomeFooter.vue'
+// @ts-ignore: allow importing Vue SFCs without type declarations
+import LinkCards from './components/LinkCards.vue'
 
 // 引入模块 CSS
 import 'katex/dist/katex.min.css'
@@ -41,6 +43,7 @@ export default {
     app.component('RecentPosts', RecentPosts)
     app.component('BackToTop', BackToTop)
     app.component('HomeFooter', HomeFooter)
+    app.component('LinkCards', LinkCards)
     app.component('vImageViewer', vImageViewer);
     
     // 如果在客户端，添加typed.js脚本

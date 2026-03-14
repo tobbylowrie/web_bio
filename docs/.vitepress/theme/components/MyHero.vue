@@ -22,7 +22,7 @@
           <span ref="descRef" id="desc"></span>
           <span ref="descCursorRef" class="typed-cursor"></span>
         </p>
-        <ul class="links">
+        <!-- <ul class="links">
           <li
             v-for="(link, index) in links"
             :key="index"
@@ -37,7 +37,7 @@
               {{ link.text }}
             </a>
           </li>
-        </ul>
+        </ul> -->
       </div>
     </div>
   </div>
