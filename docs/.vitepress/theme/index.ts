@@ -20,8 +20,6 @@ import BackToTop from './components/BackToTop.vue'
 // @ts-ignore: allow importing Vue SFCs without type declarations
 import AsideOutlineAfter from './components/aside-outline-after.vue'
 // @ts-ignore: allow importing Vue SFCs without type declarations
-import SiteStats from './components/SiteStats.vue'
-// @ts-ignore: allow importing Vue SFCs without type declarations
 import HomeFooter from './components/HomeFooter.vue'
 
 // 引入模块 CSS
@@ -42,7 +40,6 @@ export default {
     app.component('MyHero', MyHero)
     app.component('RecentPosts', RecentPosts)
     app.component('BackToTop', BackToTop)
-    app.component('SiteStats', SiteStats)
     app.component('HomeFooter', HomeFooter)
     app.component('vImageViewer', vImageViewer);
     

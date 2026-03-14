@@ -3,10 +3,9 @@ import mk from '@iktakahiro/markdown-it-katex'
 import katex from 'katex'
 import { RssPlugin } from 'vitepress-plugin-rss'
 
-// 导入模块化配置
+// 导入模块化配�?
 import { navConfig } from './config/nav'
 import { defaultSidebar } from './config/sidebar'
-import { socialConfig } from './config/social'
 import { rssConfig } from './config/rss'
 import { seoConfig } from './config/seo'
 
@@ -16,7 +15,6 @@ export default defineConfig({
   title: seoConfig.title,
   description: seoConfig.description,
   head: seoConfig.head,
-  copyright: seoConfig.copyRight, // 添加版权信息到 site 配置
   markdown: {
     config: (md) => {
       md.use(mk, { katex })

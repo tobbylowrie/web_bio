@@ -41,5 +41,7 @@ export const seoConfig = {
       async: '',
       src: 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'
     }],
+    ['meta', { name: 'social-links', content: '[{"icon":"github","link":"https://github.com/tobbylowrie/"}]' }],
+    ['meta', { name: 'site-stats', content: 'true' }],
   ] as any,
 };
