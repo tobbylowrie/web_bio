@@ -7,6 +7,7 @@ export const seoConfig = {
   head: [
     ['link', { rel: 'icon', href: '/icon.ico' }],
     ['meta', { name: 'description', content: '深韩的个人主页' }],
+    ['meta', { name: 'copyright', content: '©2016 深韩' }],
     ['meta', { name: 'keywords', content: '技术博客,Docker,树莓派,PVE,AI' }],
     ['meta', { property: 'og:title', content: '深韩的主页' }],
     ['meta', { property: 'og:description', content: '分享技术实践与学习笔记' }],
@@ -35,11 +36,10 @@ export const seoConfig = {
         "description": "技术博客作者，分享技术实践与学习笔记"
       }
     `],
-    // Cloudflare Web Analytics
+    // 不蒜子统计 - 用于展示访问数据
     ['script', {
-      defer: '',
-      src: 'https://static.cloudflareinsights.com/beacon.min.js',
-      'data-cf-beacon': '{"token": "0615fea22eb441929a8344fd809a2884"}'
+      async: '',
+      src: 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'
     }],
   ] as any,
 };

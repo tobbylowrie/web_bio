@@ -1,54 +1,68 @@
 <template>
   <div class="site-stats">
-    <span v-for="(stat, index) in stats" :key="index" class="stat-item">
-      <span class="stat-label">{{ stat.label }}</span>
-      <span class="stat-value">{{ stat.value }}</span>
-      <span v-if="index < stats.length - 1" class="stat-divider">·</span>
+    <span class="stats-pill">
+      <span class="stats-label">今日</span>
+      <span id="busuanzi_today_pv" class="stats-num">...</span>
+    </span>
+    <span class="stats-pill">
+      <span class="stats-label">总访问</span>
+      <span id="busuanzi_site_pv" class="stats-num">...</span>
     </span>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted } from 'vue'
 
-const stats = ref([
-  { value: '...', label: '总访问：' },
-  { value: '...', label: '访客：' },
-  { value: '...', label: '今日：' }
-])
+onMounted(() => {
+  // 动态加载不蒜子脚本（使用新版CDN）
+  const script = document.createElement('script')
+  script.src = 'https://cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js'
+  script.async = true
+  script.defer = true
+  document.body.appendChild(script)
+})
 </script>
 
 <style scoped>
 .site-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  font-size: 12px;
+}
+
+.stats-pill {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 0.75rem;
-  color: var(--vp-c-text-2);
-  margin-top: 24px;
-  padding: 6px 12px;
+  padding: 2px 10px;
   background: var(--vp-c-bg-soft);
-  border-radius: 20px;
-  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  color: var(--vp-c-text-3, #999);
 }
 
-.stat-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+.stats-label {
+  font-size: 11px;
+  opacity: 0.7;
 }
 
-.stat-value {
-  color: var(--vp-c-text-1);
-  font-weight: 500;
+.stats-num {
+  color: var(--vp-c-text-2);
+  font-size: 11px;
+  min-width: 16px;
+  text-align: center;
 }
 
-.stat-label {
-  font-size: 0.7rem;
-}
-
-.stat-divider {
-  margin: 0 4px;
-  opacity: 0.5;
+@media (max-width: 480px) {
+  .site-stats {
+    gap: 6px;
+  }
+  
+  .stats-pill {
+    padding: 2px 8px;
+  }
 }
 </style>

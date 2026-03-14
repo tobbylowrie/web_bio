@@ -21,6 +21,8 @@ import BackToTop from './components/BackToTop.vue'
 import AsideOutlineAfter from './components/aside-outline-after.vue'
 // @ts-ignore: allow importing Vue SFCs without type declarations
 import SiteStats from './components/SiteStats.vue'
+// @ts-ignore: allow importing Vue SFCs without type declarations
+import HomeFooter from './components/HomeFooter.vue'
 
 // 引入模块 CSS
 import 'katex/dist/katex.min.css'
@@ -31,7 +33,8 @@ export default {
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
       // 'aside-outline-after': () => h(AsideOutlineAfter),
-      'doc-bottom': () => h(BackToTop)
+      'doc-bottom': () => h(BackToTop),
+      'layout-bottom': () => h(HomeFooter)
     })
   },
   enhanceApp({ app }) {
@@ -40,6 +43,7 @@ export default {
     app.component('RecentPosts', RecentPosts)
     app.component('BackToTop', BackToTop)
     app.component('SiteStats', SiteStats)
+    app.component('HomeFooter', HomeFooter)
     app.component('vImageViewer', vImageViewer);
     
     // 如果在客户端，添加typed.js脚本

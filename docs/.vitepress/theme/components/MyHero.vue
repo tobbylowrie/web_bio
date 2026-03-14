@@ -38,7 +38,6 @@
             </a>
           </li>
         </ul>
-        <SiteStats />
       </div>
     </div>
   </div>
@@ -172,7 +171,7 @@ p {
 }
 
 .container {
-  min-height: 70vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -186,6 +185,7 @@ p {
   text-align: center;
   position: relative;
   padding: 20px;
+  margin-top: 10vh;
 }
 
 .title-text {

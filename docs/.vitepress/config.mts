@@ -16,6 +16,7 @@ export default defineConfig({
   title: seoConfig.title,
   description: seoConfig.description,
   head: seoConfig.head,
+  copyright: seoConfig.copyRight, // 添加版权信息到 site 配置
   markdown: {
     config: (md) => {
       md.use(mk, { katex })
