@@ -7,7 +7,7 @@ export const seoConfig = {
   head: [
     ['link', { rel: 'icon', href: '/icon.ico' }],
     ['meta', { name: 'description', content: '深韩的个人主页' }],
-    ['meta', { name: 'copyright', content: '©2016 深韩' }],
+    ['meta', { name: 'copyright', content: '©2026 深韩' }],
     ['meta', { name: 'keywords', content: '技术博客,Docker,树莓派,PVE,AI' }],
     ['meta', { property: 'og:title', content: '深韩的主页' }],
     ['meta', { property: 'og:description', content: '分享技术实践与学习笔记' }],
@@ -41,7 +41,11 @@ export const seoConfig = {
       async: '',
       src: 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'
     }],
-    ['meta', { name: 'social-links', content: '[{"icon":"github","link":"https://github.com/tobbylowrie/"}]' }],
-    ['meta', { name: 'site-stats', content: 'true' }],
+    ['meta', { 
+      name: 'social-links', 
+      content: '[{"icon":"github","link":"https://github.com/tobbylowrie/"},{"icon":"rss","link":"/rss.xml"}]' }],
+    ['meta', { 
+      name: 'site-stats', 
+      content: 'true' }],
   ] as any,
 };

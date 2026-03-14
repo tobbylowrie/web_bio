@@ -3,7 +3,7 @@ import mk from '@iktakahiro/markdown-it-katex'
 import katex from 'katex'
 import { RssPlugin } from 'vitepress-plugin-rss'
 
-// 导入模块化配�?
+// 导入模块化配置
 import { navConfig } from './config/nav'
 import { defaultSidebar } from './config/sidebar'
 import { rssConfig } from './config/rss'
@@ -32,7 +32,7 @@ export default defineConfig({
       }
     },
     sidebar: defaultSidebar,
-    socialLinks: socialConfig,
+    // socialLinks: socialConfig,
     outline: [2, 4], // 显示从 h2 到 h4 的标题
     outlineTitle: '本页目录',
     returnToTopLabel: '返回顶部',
