@@ -2,17 +2,39 @@
   <div class="container">
     <div class="rotating-background"></div>
     <div class="content-wrapper">
-      <a href="https://github.com/tobbylowrie/"><img class="img-fluid" src="/avatar.png" alt="lowrie-logo"
-          width="200px" loading="lazy" decoding="async"></a>
+      <a href="https://github.com/tobbylowrie/">
+        <img
+          ref="avatarRef"
+          class="img-fluid"
+          src="/avatar.png"
+          alt="lowrie-logo"
+          width="200px"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
       <div class="text-wrapper">
-        <h1 class="title-text mt-3"><strong><span id="title"></span></strong></h1>
-        <p class="discribe-text mt-1"><span id="desc"></span></p>
+        <h1 class="title-text mt-3">
+          <strong><span ref="titleRef" id="title"></span></strong>
+          <span ref="titleCursorRef" class="typed-cursor"></span>
+        </h1>
+        <p class="discribe-text mt-1">
+          <span ref="descRef" id="desc"></span>
+          <span ref="descCursorRef" class="typed-cursor"></span>
+        </p>
         <ul class="links">
-          <li class="links-item"><a class="btn" href="https://blog.tobbylowrie.com/blogs" type="button">
-              博客文章列表</a></li>
-          <li class="links-item">
-            <a class="btn" href="https://github.com/tobbylowrie/" type="button">
-              github主页
+          <li
+            v-for="(link, index) in links"
+            :key="index"
+            class="links-item"
+          >
+            <a
+              ref="buttonRefs"
+              class="btn"
+              :href="link.href"
+              type="button"
+            >
+              {{ link.text }}
             </a>
           </li>
         </ul>
@@ -21,8 +43,88 @@
   </div>
 </template>
 
-<style scoped>
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import Typed from 'typed.js'
 
+// 链接配置
+const links = [
+  { href: 'https://blog.tobbylowrie.com/blogs', text: '博客文章列表' },
+  { href: 'https://github.com/tobbylowrie/', text: 'github主页' }
+]
+
+// refs
+const avatarRef = ref<HTMLImageElement>()
+const titleRef = ref<HTMLSpanElement>()
+const descRef = ref<HTMLSpanElement>()
+const titleCursorRef = ref<HTMLSpanElement>()
+const descCursorRef = ref<HTMLSpanElement>()
+const buttonRefs = ref<HTMLAnchorElement[]>([])
+
+const cursorChar = '|'
+const CURSOR_HIDE_DELAY = 1000
+const DESC_CURSOR_HIDE_DELAY = 3000
+const BUTTON_STAGGER_DELAY = 200
+
+onMounted(() => {
+  // 头像动画
+  setTimeout(() => {
+    avatarRef.value?.classList.add('show')
+  }, 100)
+
+  // 按钮动画延迟显示
+  setTimeout(() => {
+    buttonRefs.value.forEach((button, index) => {
+      setTimeout(() => {
+        button.classList.add('show')
+      }, 2000 + (index * BUTTON_STAGGER_DELAY))
+    })
+  }, 100)
+
+  // 文字打字机效果
+  setTimeout(() => {
+    if (!titleRef.value) return
+
+    new Typed(titleRef.value, {
+      strings: ['你好, 我是深韩'],
+      typeSpeed: 50,
+      showCursor: false, // 使用自定义光标
+      onComplete: () => {
+        // 隐藏标题光标
+        setTimeout(() => {
+          if (titleCursorRef.value) {
+            titleCursorRef.value.style.display = 'none'
+          }
+        }, CURSOR_HIDE_DELAY)
+
+        // 标题完成后开始描述文字
+        if (!descRef.value) return
+
+        new Typed(descRef.value, {
+          strings: ['欢迎你来到我的个人主页'],
+          typeSpeed: 40,
+          showCursor: false, // 使用自定义光标
+          onComplete: () => {
+            // 隐藏描述光标
+            setTimeout(() => {
+              if (descCursorRef.value) {
+                descCursorRef.value.style.display = 'none'
+              }
+            }, DESC_CURSOR_HIDE_DELAY)
+          }
+        })
+      }
+    })
+
+    // 手动触发光标闪烁动画
+    if (titleCursorRef.value) {
+      titleCursorRef.value.textContent = cursorChar
+    }
+  }, 200)
+})
+</script>
+
+<style scoped>
 body {
   margin: 0;
   padding: 20px;
@@ -38,32 +140,18 @@ body {
   left: -50%;
   width: 200%;
   height: 200%;
-  /* background: radial-gradient(rgba(127, 78, 45, 0.4) 2px, transparent 1px); */
   background: radial-gradient(var(--vp-c-text-1) 2px, transparent 1px);
-
   background-size: 50px 50px;
   animation: rotate 60s linear infinite, twinkle 3s ease-in-out infinite alternate;
 }
 
 @keyframes twinkle {
-
   0%,
   100% {
     opacity: 0.1;
   }
-
   50% {
     opacity: 0.02;
-  }
-}
-
-@keyframes scale {
-  0% {
-    background-size: 45px 45px;
-  }
-
-  100% {
-    background-size: 55px 55px;
   }
 }
 
@@ -71,7 +159,6 @@ body {
   0% {
     transform: rotate(0deg);
   }
-
   100% {
     transform: rotate(360deg);
   }
@@ -115,8 +202,8 @@ p {
   line-height: 1;
 }
 
-/* 标题光标样式 */
-#title+.typed-cursor {
+/* 光标样式 */
+.typed-cursor {
   font-size: 2rem;
   color: var(--text-primary);
   position: relative;
@@ -125,24 +212,18 @@ p {
   animation: blink 0.7s infinite;
 }
 
-/* 描述文字光标样式 */
-#desc+.typed-cursor {
+.discribe-text .typed-cursor {
   font-size: 1.5rem;
   color: var(--text-secondary);
-  position: relative;
   margin-left: 3px;
-  vertical-align: baseline;
-  animation: blink 0.7s infinite;
 }
 
 /* 光标闪烁动画 */
 @keyframes blink {
-
   0%,
   100% {
     opacity: 1;
   }
-
   50% {
     opacity: 0;
   }
@@ -181,16 +262,19 @@ p {
   padding: 12px;
   border-radius: 7px;
   text-decoration: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
+
 .btn:hover {
   color: var(--text-primary);
   background-color: var(--vp-c-default-1);
 }
 
-
-
-.mt-5 {
-  margin-top: 50px;
+.btn.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .mt-3 {
@@ -204,8 +288,8 @@ p {
 .img-fluid {
   opacity: 0;
   transform: scale(0.5) translateY(-20px);
-  transition: opacity 0.96s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.96s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  /* GitHub风格的头像样式 */
+  transition: opacity 0.96s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    transform 0.96s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   border-radius: 50%;
   border: 1px solid rgba(127, 78, 45, 0.2);
   box-shadow: 0 0 0 1px rgba(127, 78, 45, 0.15);
@@ -216,73 +300,4 @@ p {
   opacity: 1;
   transform: scale(1) translateY(0);
 }
-
-/* 按钮渐入动画 */
-.btn {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.btn.show {
-  opacity: 1;
-  transform: translateY(0);
-}
 </style>
-
-<script setup>
-import { onMounted } from 'vue'
-import Typed from 'typed.js'
-
-// 统一设置光标消失延迟时间
-
-// 设置光标显示字符
-const cursorChar = '|';
-
-onMounted(() => {
-  // 图片动画
-  setTimeout(() => {
-    document.querySelector('.img-fluid').classList.add('show');
-  }, 100);
-
-  // 按钮动画延迟显示
-  setTimeout(() => {
-    const buttons = document.querySelectorAll('.btn');
-    buttons.forEach((button, index) => {
-      setTimeout(() => {
-        button.classList.add('show');
-      }, 2000 + (index * 200)); // 在打字效果后显示，每个按钮间隔200ms
-    });
-  }, 100);
-
-  // 文字打字机效果
-  setTimeout(() => {
-    new Typed('#title', {
-      strings: ["你好, 我是深韩"],
-      typeSpeed: 50,
-      showCursor: true,
-      cursorChar: cursorChar,
-      onComplete: function (self) {
-        // 3秒后隐藏光标
-        setTimeout(() => {
-          document.querySelector('.typed-cursor').style.display = 'none';
-        }, 1000);
-
-        // 标题完成后开始描述文字
-        new Typed('#desc', {
-          strings: ["欢迎你来到我的个人主页"],
-          typeSpeed: 40,
-          showCursor: true,
-          cursorChar: cursorChar,
-          onComplete: function (self) {
-            // 3秒后隐藏第二个光标
-            setTimeout(() => {
-              document.querySelectorAll('.typed-cursor')[1].style.display = 'none';
-            }, 3*1000);
-          }
-        });
-      }
-    });
-  }, 200);
-})
-</script>
