@@ -1,13 +1,19 @@
-# Node.js dependencies
+# Dependencies
 node_modules/
-npm-debug.log
-yarn-debug.log
-yarn-error.log
+.pnpm-store/
+
+# Lock files (keep pnpm-lock.yaml)
 package-lock.json
 yarn.lock
 
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
 # VitePress build output
-.vitepress/dist/
 docs/.vitepress/dist/
 docs/.vitepress/cache/
 
@@ -22,25 +28,27 @@ docs/.vitepress/cache/
 
 # OS generated files
 .DS_Store
-Thumbs.db
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
 ehthumbs.db
-Desktop.ini
+Thumbs.db
+desktop.ini
 
 # Local environment files
 .env
 .env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*.local
 
 # Log files
 logs/
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
 
 # Temporary files
 *.tmp
 *.temp
+.cache/
+
+# VitePress local config
+*.local
