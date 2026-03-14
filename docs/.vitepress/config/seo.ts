@@ -35,5 +35,11 @@ export const seoConfig = {
         "description": "技术博客作者，分享技术实践与学习笔记"
       }
     `],
+    // Cloudflare Web Analytics
+    ['script', {
+      defer: '',
+      src: 'https://static.cloudflareinsights.com/beacon.min.js',
+      'data-cf-beacon': '{"token": "0615fea22eb441929a8344fd809a2884"}'
+    }],
   ] as any,
 };

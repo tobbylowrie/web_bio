@@ -38,6 +38,7 @@
             </a>
           </li>
         </ul>
+        <SiteStats />
       </div>
     </div>
   </div>
