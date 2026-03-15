@@ -17,11 +17,6 @@ import { useData } from 'vitepress'
 
 const { page, site } = useData()
 
-// 判断是否在主页
-const isHome = computed(() => {
-  return page.value.relativePath === 'index.md'
-})
-
 // 从 head 的 meta 标签获取版权信息
 const copyright = computed(() => {
   const headMeta = (site.value.head || []) as any[]
