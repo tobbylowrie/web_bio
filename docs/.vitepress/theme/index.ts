@@ -6,8 +6,6 @@ import 'viewerjs/dist/viewer.min.css';
 import imageViewer from 'vitepress-plugin-image-viewer';
 import vImageViewer from 'vitepress-plugin-image-viewer/lib/vImageViewer.vue';
 import { useRoute } from 'vitepress';
-// @ts-ignore: busuanzi.pure.js has no type declarations
-import busuanzi from 'busuanzi.pure.js';
 
 // 引入全局 CSS
 import './style.css'
@@ -46,17 +44,15 @@ export default {
     app.component('HomeFooter', HomeFooter)
     app.component('LinkCards', LinkCards)
     app.component('vImageViewer', vImageViewer);
-    
-    // 如果在客户端，初始化不蒜子统计
-    if (typeof window !== 'undefined') {
-      // @ts-ignore
-      window.busuanzi = busuanzi;
-    }
   },
   setup() {
-        // 获取路由
-        const route = useRoute();
-        // 使用
-        imageViewer(route);
-    }
+    // 获取路由
+    const route = useRoute();
+    // 使用 viewerjs，过滤掉带有 no-viewer 类的图片
+    imageViewer(route, '.vp-doc', {
+      filter(image: HTMLImageElement) {
+        return !image.classList.contains('no-viewer');
+      }
+    });
+  }
 } satisfies Theme

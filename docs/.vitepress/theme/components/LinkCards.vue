@@ -11,7 +11,7 @@
         <img
           :src="card.image"
           :alt="card.title"
-          class="card-image"
+          class="card-image no-viewer"
           loading="lazy"
           decoding="async"
         />

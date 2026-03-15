@@ -5,7 +5,7 @@
       <a href="https://github.com/tobbylowrie/">
         <img
           ref="avatarRef"
-          class="img-fluid"
+          class="img-fluid no-viewer"
           src="/avatar.png"
           alt="lowrie-logo"
           width="200px"
