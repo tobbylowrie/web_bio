@@ -11,6 +11,9 @@ importers:
       '@iktakahiro/markdown-it-katex':
         specifier: ^4.0.1
         version: 4.0.1
+      busuanzi.pure.js:
+        specifier: ^1.0.3
+        version: 1.0.3
       feed:
         specifier: ^5.2.0
         version: 5.2.0
@@ -754,6 +757,9 @@ packages:
 
   birpc@2.9.0:
     resolution: {integrity: sha512-KrayHS5pBi69Xi9JmvoqrIgYGDkD6mcSe/i6YKi3w5kekCLzrX4+nawcXqrj2tIp50Kw/mT/s3p+GVK0A0sKxw==}
+
+  busuanzi.pure.js@1.0.3:
+    resolution: {integrity: sha512-tPULdyx+8NNb9geZYDpktKmHAYx9f2LEOBaHyWCaM7iPEMIa/43KgYAUluuU7YG9UFSOFpj4dO7Nj2Vlu3V9Rg==}
 
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
@@ -1720,6 +1726,8 @@ snapshots:
       sprintf-js: 1.0.3
 
   birpc@2.9.0: {}
+
+  busuanzi.pure.js@1.0.3: {}
 
   ccount@2.0.1: {}
 

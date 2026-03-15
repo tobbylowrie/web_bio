@@ -36,5 +36,9 @@ export const seoConfig = {
         "description": "技术博客作者，分享技术实践与学习笔记"
       }
     `],
+    // 不蒜子统计 - 用于展示访问数据
+    // ['script', { async: '', src: 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js' }],
+    // ['script', {src: 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js' }],
+    ['meta', {name: 'referrer', content: 'no-referrer-when-downgrade'}],
   ] as any,
 };
