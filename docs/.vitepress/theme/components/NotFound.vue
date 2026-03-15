@@ -1,46 +1,19 @@
+<script setup>
+</script>
+
 <template>
-  <div class="link-cards-container">
-    <a
-      v-for="(card, index) in cards"
-      :key="index"
-      :href="card.href"
-      class="card-link"
-    >
-      <div class="card-image-wrapper">
-        <div class="card-bg-square"></div>
-        <img
-          :src="card.image"
-          :alt="card.title"
-          class="card-image no-viewer"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-      <h3 class="card-title">{{ card.title }}</h3>
-    </a>
+  <div class="not-found">
+    <div class="link-cards-container">
+      <a :href="'/'" class="card-link">
+        <div class="card-image-wrapper">
+          <div class="card-bg-square"></div>
+          <img src="/404.png" alt="404" class="card-image" />
+        </div>
+        <h3 class="card-title">404 - 页面未找到</h3>
+      </a>
+    </div>
   </div>
 </template>
-
-<script setup lang="ts">
-interface Card {
-  title: string
-  image: string
-  href: string
-}
-
-const cards: Card[] = [
-  {
-    title: '全部文章',
-    image: '/全部文章_透明背景.png',
-    href: '/blogs/'
-  },
-  {
-    title: '音乐收藏',
-    image: '/音乐收藏_透明背景.png',
-    href: '/music/'
-  }
-]
-</script>
 
 <style scoped>
 .link-cards-container {
@@ -50,13 +23,6 @@ const cards: Card[] = [
   padding: 20px;
   margin-top: 20px;
   margin-bottom: 40px;
-}
-
-.card-link {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
 }
 
 .card-image-wrapper {
@@ -93,8 +59,8 @@ const cards: Card[] = [
 
 /* 标题 - 加粗 */
 .card-title {
-  margin-top: 16px;
-  font-size: 1.1rem;
+  margin-top: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--vp-c-text-1);
   text-align: center;
@@ -120,5 +86,23 @@ const cards: Card[] = [
     align-items: center;
     gap: 32px;
   }
+}
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  padding: 2rem;
+}
+
+.not-found-image {
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+  margin-bottom: 1.5rem;
+  border-radius: 25px;
 }
 </style>

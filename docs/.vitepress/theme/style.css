@@ -74,6 +74,8 @@
   --vp-c-danger-2: var(--vp-c-red-2);
   --vp-c-danger-3: var(--vp-c-red-3);
   --vp-c-danger-soft: var(--vp-c-red-soft);
+
+  --lowrie-c-icon-bg: #ffeee0;;
 }
 
 .dark {
@@ -84,7 +86,9 @@
   --vp-c-bg-elv: #202127;
   --vp-c-bg-soft: #202127;
 
-  --vp-c-divider: #4F505A
+  --vp-c-divider: #4F505A;
+
+  --lowrie-c-icon-bg: #7c6552;
   
 }
 /**

@@ -24,7 +24,7 @@ import AsideOutlineAfter from './components/aside-outline-after.vue'
 import HomeFooter from './components/HomeFooter.vue'
 // @ts-ignore: allow importing Vue SFCs without type declarations
 import LinkCards from './components/LinkCards.vue'
-
+import NotFound from './components/NotFound.vue'
 // 引入模块 CSS
 import 'katex/dist/katex.min.css'
 
@@ -34,7 +34,8 @@ export default {
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
       // 'aside-outline-after': () => h(AsideOutlineAfter),
-      'doc-bottom': () => h(BackToTop)
+      'doc-bottom': () => h(BackToTop),
+      'not-found': () => h(NotFound)
     })
   },
   enhanceApp({ app }) {
