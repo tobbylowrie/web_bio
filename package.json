@@ -7,6 +7,7 @@
   },
   "devDependencies": {
     "typed.js": "^3.0.0",
+    "vite-plugin-image-optimizer": "^2.0.3",
     "vitepress": "^1.6.4"
   },
   "dependencies": {

@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 import mk from '@iktakahiro/markdown-it-katex'
 import katex from 'katex'
 import { RssPlugin } from 'vitepress-plugin-rss'
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 
 // 导入模块化配置
 import { navConfig } from './config/nav'
@@ -25,13 +26,13 @@ export default defineConfig({
     darkModeSwitchLabel: '深色模式', // 修改开关标签为中文
     darkModeSwitchTitle: '切换深色/浅色模式', // 修改鼠标悬停提示
     nav: navConfig,
-    lastUpdated: {
-      text: '最后更新日期',
-      formatOptions: {
-        dateStyle: 'long',
-        timeStyle: 'short'
-      }
-    },
+    // lastUpdated: {
+    //   text: '最后更新日期',
+    //   formatOptions: {
+    //     dateStyle: 'long',
+    //     timeStyle: 'short'
+    //   }
+    // },
     sidebar: defaultSidebar,
     socialLinks: socialConfig,
     outline: [2, 4], // 显示从 h2 到 h4 的标题
@@ -42,6 +43,72 @@ export default defineConfig({
     langMenuLabel: '切换语言'
   },
   vite: {
-    plugins: [RssPlugin(rssConfig)]
+    plugins: [
+      // RSS 插件配置
+      RssPlugin(rssConfig),
+      // 图片优化插件配置
+      ViteImageOptimizer({
+        logStats: true,
+        ansiColors: true,
+        test: /\.(jpe?g|png|gif|tiff|webp|svg|avif)$/i,
+        exclude: undefined,
+        include: undefined,
+        includePublic: true,
+        svg: {
+          multipass: true,
+          plugins: [
+            {
+              name: 'preset-default',
+              params: {
+                overrides: {
+                  cleanupNumericValues: false,
+                  cleanupIds: {
+                    minify: false,
+                    remove: false,
+                  },
+                  convertPathData: false,
+                },
+              },
+            },
+            'sortAttrs',
+            {
+              name: 'addAttributesToSVGElement',
+              params: {
+                attributes: [{ xmlns: 'http://www.w3.org/2000/svg' }],
+              },
+            },
+          ],
+        },
+        png: {
+          // https://sharp.pixelplumbing.com/api-output#png
+          quality: 80,
+        },
+        jpeg: {
+          // https://sharp.pixelplumbing.com/api-output#jpeg
+          quality: 80,
+        },
+        jpg: {
+          // https://sharp.pixelplumbing.com/api-output#jpeg
+          quality: 80,
+        },
+        tiff: {
+          // https://sharp.pixelplumbing.com/api-output#tiff
+          quality: 80,
+        },
+        // gif does not support lossless compression
+        // https://sharp.pixelplumbing.com/api-output#gif
+        gif: {},
+        webp: {
+          // https://sharp.pixelplumbing.com/api-output#webp
+          lossless: true,
+        },
+        avif: {
+          // https://sharp.pixelplumbing.com/api-output#avif
+          lossless: true,
+        },
+        cache: false,
+        cacheLocation: undefined,
+      })
+    ]
   }
 })
