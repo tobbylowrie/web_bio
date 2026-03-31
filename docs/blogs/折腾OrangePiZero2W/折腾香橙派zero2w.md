@@ -1,10 +1,14 @@
 ---
+
 title: 折腾香橙派 Zero 2w
 date: 2026-03-30
 description: 折腾香橙派 Zero 2w
 author: 深韩
+
 ---
+
 # 折腾香橙派 Zero 2w
+
 ## 环境
 
 **硬件**
@@ -149,8 +153,6 @@ Starting kernel ...
 板子上电源指示灯（红色）旁边的数据指示灯（绿色）会开始闪烁，说明系统正确启动
 
 <!-- ![PixPin_2026-03-29_21-04-58](E:\workspaces\orangepizero2w\docs\PixPin_2026-03-29_21-04-58.gif) -->
-
-
 
 首次启动 armbian 会要求设置初始 root 密码，连接wifi，以及初始化一个普通用户
 
@@ -448,20 +450,20 @@ sudo ln -s /usr/local/nodejs/node-v24.14.1-linux-arm64/bin/npx /usr/local/bin
 npm config set registry https://registry.npmmirror.com
 ```
 
-## 配置 USB gadget 虚拟网卡 (RNDIS)
+## 配置 USB gadget 虚拟网卡 (RNDIS) 与虚拟串口
 
 写入启动脚本 /usr/local/bin/usb-gadget.sh
 
 ```bash
 #!/bin/bash
 # /usr/local/bin/usb-gadget.sh
-# USB Gadget 网口配置脚本
+# USB Gadget 配置脚本
 # 用于 Orange Pi Zero 2W 调试
 
 GADGET_NAME="opi_gadget"
-USB_IP="192.168.7.2"
+USB_IP="192.168.137.2"
 USB_NETMASK="255.255.255.0"
-
+USB_GATEWAY="192.168.137.1"
 # 加载必要模块
 modprobe libcomposite 2>/dev/null || { echo "无法加载 libcomposite 模块"; exit 1; }
 
@@ -508,7 +510,7 @@ echo "Orange Pi Zero 2W USB Ethernet" > strings/0x409/product
 
 # 创建配置
 mkdir -p configs/c.1/strings/0x409
-echo "RNDIS Network" > configs/c.1/strings/0x409/configuration
+echo "RNDIS + Serial" > configs/c.1/strings/0x409/configuration
 echo 250 > configs/c.1/MaxPower
 
 # 创建 RNDIS 以太网功能（Windows兼容性好）
@@ -517,13 +519,17 @@ mkdir -p functions/rndis.usb0
 echo "02:00:00:00:00:02" > functions/rndis.usb0/host_addr
 echo "02:00:00:00:00:01" > functions/rndis.usb0/dev_addr
 
+# 创建 ACM 串口功能
+mkdir -p functions/acm.usb0
+
 # Windows 需要 OS 描述符支持
 echo 1 > os_desc/use
 echo 0xcd > os_desc/b_vendor_code
 echo MSFT100 > os_desc/qw_sign
 
-# 将 RNDIS 功能链接到配置
+# 将功能链接到配置
 ln -s functions/rndis.usb0 configs/c.1/
+ln -s functions/acm.usb0 configs/c.1/
 ln -s configs/c.1 os_desc
 
 # 获取 USB 控制器并激活
@@ -549,14 +555,35 @@ if ip link show usb0 >/dev/null 2>&1; then
     ip addr flush dev usb0 2>/dev/null
     ip addr add "$USB_IP/$USB_NETMASK" dev usb0
     ip link set usb0 up
+        # 添加默认网关
+    ip route add default via "$USB_GATEWAY" dev usb0 2>/dev/null && echo "默认网关已配置: $USB_GATEWAY" || echo "警告: 默认网关配置失败"
+    # 配置 DNS 服务器
+    echo "nameserver 223.5.5.5" > /etc/resolv.conf
+    echo "nameserver 8.8.8.8" >> /etc/resolv.conf
+    echo "DNS 已配置: 223.5.5.5, 8.8.8.8"
     echo "USB Gadget 网口已配置: $USB_IP/24"
 else
     echo "警告: usb0 接口未出现"
     exit 1
 fi
 
+# 启动 USB 串口登录服务
+for i in {1..10}; do
+    if [ -c /dev/ttyGS0 ]; then
+        systemctl start serial-getty@ttyGS0.service 2>/dev/null && echo "USB 串口 ttyGS0 登录服务已启动" || echo "USB 串口登录服务启动失败"
+        break
+    fi
+    sleep 0.5
+done
+
 echo "USB Gadget 模式已启动"
 echo "设备IP: $USB_IP"
+```
+
+然后给予执行权限
+
+```bash
+sudo chmod +x /usr/local/bin/usb-gadget.sh
 ```
 
 写入服务配置 /etc/systemd/system/usb-gadget.service
@@ -602,7 +629,52 @@ sudo systemctl restart usb-gadget # 重启
 sudo systemctl enable usb-gadget
 ```
 
-以上配置完成后，重启板子，并连接USB接口，电脑设备管理器上会出现 RNDIS 网卡，如果驱动无法识别，按照下面方法更新驱动
+### Windows 端网络共享配置
+
+以上配置完成后，重启板子并连接 USB 接口，电脑设备管理器上会出现 RNDIS 网卡。
+
+**1. 驱动安装**
+
+如果驱动无法识别，按照下面方法更新驱动：
+
+1. 设备管理器中找到未知设备（带黄色感叹号）
+2. 右键 → 更新驱动程序 → 浏览我的计算机以查找驱动程序
+3. 让我从计算机上的可用驱动程序列表中选取
+4. 选择「网络适配器」→ 厂商「Microsoft」→ 型号「Remote NDIS Compatible Device」
+
+**2. 配置静态 IP**
+
+为 RNDIS 网卡配置静态 IP：
+
+- IP 地址：`192.168.137.101`
+- 子网掩码：`255.255.255.0`
+- 默认网关：留空
+
+**3. 启用网络共享**
+
+1. 打开「网络连接」（`ncpa.cpl`）
+2. 右键你的主网卡（Wi-Fi 或有线网卡）→ 属性 → 共享
+3. 勾选「允许其他网络用户通过此计算机的 Internet 连接」
+4. 下拉选择 RNDIS Gadget 网卡
+5. 点击确定
+
+> **注意**：启用共享后，Windows 会自动将 RNDIS 网卡的 IP 改为 `192.168.137.1`，这是正常现象。
+
+**4. 防火墙设置**
+
+如果无法 ping 通 Windows，请临时关闭防火墙测试：
+
+- 或者添加允许 192.168.137.0/24 网段的入站规则
+
+**5. 验证连接**
+
+在 Orange Pi 上执行：
+
+```bash
+ping 192.168.137.1    # 测试与 Windows 连接
+ping 223.5.5.5        # 测试外网连接
+curl baidu.com        # 测试 DNS 解析
+```
 
 ![fe1c6c2d-b23a-487b-b6bb-85fb6ea1eaa5](./fe1c6c2d-b23a-487b-b6bb-85fb6ea1eaa5.png)
 
@@ -704,4 +776,3 @@ gpio readall
 
 
 待续未完...
-
