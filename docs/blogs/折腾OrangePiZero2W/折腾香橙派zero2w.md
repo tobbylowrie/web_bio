@@ -458,30 +458,50 @@ npm config set registry https://registry.npmmirror.com
 #!/bin/bash
 # /usr/local/bin/usb-gadget.sh
 # USB Gadget 配置脚本
-# 用于 Orange Pi Zero 2W 调试
 
 GADGET_NAME="opi_gadget"
 USB_IP="192.168.137.2"
 USB_NETMASK="255.255.255.0"
 USB_GATEWAY="192.168.137.1"
-# 加载必要模块
-modprobe libcomposite 2>/dev/null || { echo "无法加载 libcomposite 模块"; exit 1; }
+SERIAL_NUM="OPiZero2W-001"
 
-# 挂载 configfs（如果未挂载）
+# 日志函数
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
+    logger -t usb-gadget "$1"
+}
+
+log "开始配置 USB Gadget..."
+
+# 加载必要模块
+if ! modprobe libcomposite 2>/dev/null; then
+    log "错误: 无法加载 libcomposite 模块"
+    exit 1
+fi
+
+# 等待 configfs 就绪（最多10秒）
+for i in {1..20}; do
+    if [ -d /sys/kernel/config/usb_gadget ]; then
+        break
+    fi
+    sleep 0.5
+done
+
 if [ ! -d /sys/kernel/config/usb_gadget ]; then
-    mount -t configfs none /sys/kernel/config 2>/dev/null || { echo "无法挂载 configfs"; exit 1; }
+    log "错误: configfs 不可用"
+    exit 1
 fi
 
 # 进入 Gadget 配置目录
-cd /sys/kernel/config/usb_gadget/ 2>/dev/null || { echo "configfs 不可用"; exit 1; }
+cd /sys/kernel/config/usb_gadget/ || { log "无法进入 gadget 目录"; exit 1; }
 
-# 如果已存在则先删除旧配置
+# 清理旧配置
 if [ -d "$GADGET_NAME" ]; then
-    echo "删除旧配置..."
+    log "清理旧配置..."
     # 先断开 UDC
     if [ -s "$GADGET_NAME/UDC" ]; then
         echo "" > "$GADGET_NAME/UDC" 2>/dev/null
-        sleep 0.5
+        sleep 1
     fi
     # 删除符号链接
     find "$GADGET_NAME/configs" -type l -delete 2>/dev/null
@@ -490,64 +510,61 @@ if [ -d "$GADGET_NAME" ]; then
     rm -rf "$GADGET_NAME/configs/"* 2>/dev/null
     rm -rf "$GADGET_NAME/strings/"* 2>/dev/null
     rm -rf "$GADGET_NAME"
+    sleep 0.5
 fi
 
 # 创建 Gadget 设备
 mkdir -p "$GADGET_NAME"
-cd "$GADGET_NAME"
+cd "$GADGET_NAME" || { log "无法创建 gadget"; exit 1; }
 
 # 设置设备信息
-echo 0x1d6b > idVendor      # Linux Foundation
-echo 0x0104 > idProduct     # Multifunction Composite Gadget
+echo 0x0bb4 > idVendor      # HTC
+echo 0x0fff > idProduct     # 
 echo 0x0100 > bcdDevice      # v1.0.0
 echo 0x0200 > bcdUSB         # USB 2.0
 
 # 设置设备描述字符串
 mkdir -p strings/0x409
-echo "$(cat /proc/sys/kernel/hostname)-$(date +%s)" > strings/0x409/serialnumber
+echo "${SERIAL_NUM}" > strings/0x409/serialnumber
 echo "Orange Pi" > strings/0x409/manufacturer
-echo "Orange Pi Zero 2W USB Ethernet" > strings/0x409/product
+echo "Orange Pi Zero 2W USB Composite" > strings/0x409/product
 
 # 创建配置
 mkdir -p configs/c.1/strings/0x409
 echo "RNDIS + Serial" > configs/c.1/strings/0x409/configuration
 echo 250 > configs/c.1/MaxPower
 
-# 创建 RNDIS 以太网功能（Windows兼容性好）
+# 创建 RNDIS 以太网功能
 mkdir -p functions/rndis.usb0
-# 设置 MAC 地址
 echo "02:00:00:00:00:02" > functions/rndis.usb0/host_addr
 echo "02:00:00:00:00:01" > functions/rndis.usb0/dev_addr
 
-# 创建 ACM 串口功能
+# 创建 ACM 串口功能（启用）
 mkdir -p functions/acm.usb0
-
-# Windows 需要 OS 描述符支持
-echo 1 > os_desc/use
-echo 0xcd > os_desc/b_vendor_code
-echo MSFT100 > os_desc/qw_sign
+log "ACM 串口功能已创建"
 
 # 将功能链接到配置
 ln -s functions/rndis.usb0 configs/c.1/
 ln -s functions/acm.usb0 configs/c.1/
-ln -s configs/c.1 os_desc
+# ln -s configs/c.1 os_desc
+log "功能已绑定到配置"
 
 # 获取 USB 控制器并激活
 UDC=$(ls /sys/class/udc/ | head -n1)
 if [ -z "$UDC" ]; then
-    echo "错误: 未找到 USB Device Controller"
+    log "错误: 未找到 USB Device Controller"
     exit 1
 fi
 
-echo "启用 UDC: $UDC"
+log "启用 UDC: $UDC"
 echo "$UDC" > UDC
 
-# 等待接口出现
-for i in {1..10}; do
+# 等待网络接口出现
+for i in {1..20}; do
     if ip link show usb0 >/dev/null 2>&1; then
         break
     fi
-    sleep 0.5
+    sleep 0.3
 done
 
 # 配置网络接口
@@ -555,29 +572,41 @@ if ip link show usb0 >/dev/null 2>&1; then
     ip addr flush dev usb0 2>/dev/null
     ip addr add "$USB_IP/$USB_NETMASK" dev usb0
     ip link set usb0 up
-        # 添加默认网关
-    ip route add default via "$USB_GATEWAY" dev usb0 2>/dev/null && echo "默认网关已配置: $USB_GATEWAY" || echo "警告: 默认网关配置失败"
-    # 配置 DNS 服务器
+    ip route add default via "$USB_GATEWAY" dev usb0 2>/dev/null && log "默认网关已配置" || true
+    # 配置 DNS
     echo "nameserver 223.5.5.5" > /etc/resolv.conf
     echo "nameserver 8.8.8.8" >> /etc/resolv.conf
-    echo "DNS 已配置: 223.5.5.5, 8.8.8.8"
-    echo "USB Gadget 网口已配置: $USB_IP/24"
+    log "USB 网口已配置: $USB_IP/24"
 else
-    echo "警告: usb0 接口未出现"
-    exit 1
+    log "警告: usb0 接口未出现"
 fi
 
-# 启动 USB 串口登录服务
-for i in {1..10}; do
+# 启动 USB 串口登录服务（使用后台模式避免阻塞主脚本）
+(
+    # 等待 ttyGS0 设备就绪（最多10秒）
+    for i in {1..20}; do
+        if [ -c /dev/ttyGS0 ]; then
+            break
+        fi
+        sleep 0.5
+    done
+    
     if [ -c /dev/ttyGS0 ]; then
-        systemctl start serial-getty@ttyGS0.service 2>/dev/null && echo "USB 串口 ttyGS0 登录服务已启动" || echo "USB 串口登录服务启动失败"
-        break
+        # 检查服务是否存在
+        if systemctl cat serial-getty@ttyGS0.service >/dev/null 2>&1; then
+            systemctl start serial-getty@ttyGS0.service && log "USB 串口登录服务已启动" || log "USB 串口服务启动失败"
+        else
+            # 如果服务不存在，手动启动 getty
+            /sbin/agetty -L ttyGS0 115200 vt100 &
+            log "通过 agetty 启动 USB 串口"
+        fi
+    else
+        log "警告: /dev/ttyGS0 未出现"
     fi
-    sleep 0.5
-done
+) &
 
-echo "USB Gadget 模式已启动"
-echo "设备IP: $USB_IP"
+log "USB Gadget 配置完成"
+exit 0
 ```
 
 然后给予执行权限
@@ -590,23 +619,25 @@ sudo chmod +x /usr/local/bin/usb-gadget.sh
 
 ```bash
 [Unit]
-Description=USB Gadget Network (RNDIS)
-After=systemd-modules-load.service
-Before=network.target
+Description=USB Gadget (RNDIS + ACM Serial)
+# 延迟到多用户模式和 udev 完成后启动
+After=multi-user.target systemd-udev-settle.service sys-kernel-config.mount
+Wants=systemd-udev-settle.service
+# 移除 Before=network.target 避免早期启动竞争
 
 [Service]
 Type=oneshot
 User=root
-Group=root
 RemainAfterExit=yes
+# 添加延迟确保硬件就绪
+ExecStartPre=/bin/sleep 2
 ExecStart=/usr/local/bin/usb-gadget.sh
-ExecStop=/bin/bash -c 'echo "" > /sys/kernel/config/usb_gadget/opi_gadget/UDC 2>/dev/null; ip link set usb0 down 2>/dev/null'
+ExecStop=/bin/bash -c 'echo "" > /sys/kernel/config/usb_gadget/opi_gadget/UDC 2>/dev/null; ip link set usb0 down 2>/dev/null; sleep 1'
 Restart=on-failure
-RestartSec=2
+RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
-
 ```
 
 重启 systemctl daemon
