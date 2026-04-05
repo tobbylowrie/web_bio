@@ -24,6 +24,8 @@ import AsideOutlineAfter from './components/aside-outline-after.vue'
 import HomeFooter from './components/HomeFooter.vue'
 // @ts-ignore: allow importing Vue SFCs without type declarations
 import LinkCards from './components/LinkCards.vue'
+// @ts-ignore: allow importing Vue SFCs without type declarations
+import BookmarkCard from './components/BookmarkCard.vue'
 import NotFound from './components/NotFound.vue'
 // 引入模块 CSS
 import 'katex/dist/katex.min.css'
@@ -45,6 +47,7 @@ export default {
     app.component('BackToTop', BackToTop)
     app.component('HomeFooter', HomeFooter)
     app.component('LinkCards', LinkCards)
+    app.component('BookmarkCard', BookmarkCard)
     app.component('vImageViewer', vImageViewer);
 
     // 如果在客户端，初始化不蒜子统计
