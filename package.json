@@ -2,8 +2,9 @@
   "type": "module",
   "scripts": {
     "docs:dev": "vitepress dev docs --host 0.0.0.0",
+    "script:music": "node scripts/update-playlists.js",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress build docs && vitepress preview docs"
   },
   "devDependencies": {
     "typed.js": "^3.0.0",
