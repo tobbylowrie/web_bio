@@ -30,7 +30,7 @@ interface Card {
 
 const cards: Card[] = [
   {
-    title: '全部文章',
+    title: '博客',
     image: '/全部文章_透明背景.png',
     href: '/blogs/'
   },
@@ -94,7 +94,7 @@ const cards: Card[] = [
 /* 标题 - 加粗 */
 .card-title {
   margin-top: 16px;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--vp-c-text-1);
   text-align: center;

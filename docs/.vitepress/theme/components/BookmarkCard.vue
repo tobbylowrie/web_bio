@@ -248,10 +248,6 @@ onMounted(() => {
   transition: transform 0.3s ease;
 }
 
-.bookmark-card:hover .bookmark-image {
-  transform: scale(1.05);
-}
-
 /* 加载状态骨架屏 */
 .bookmark-card.loading {
   pointer-events: none;
