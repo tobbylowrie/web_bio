@@ -1,3 +1,13 @@
+---
+
+title: Nodejs安装
+date: 2026-04-03
+description: Nodejs安装
+author: 深韩
+tags: [Node]
+
+---
+
 # Nodejs安装
 
 ## 手动安装方法

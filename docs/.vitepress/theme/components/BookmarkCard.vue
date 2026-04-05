@@ -165,11 +165,11 @@ onMounted(() => {
 .bookmark-card {
   display: flex;
   align-items: stretch;
-  gap: 16px;
-  padding: 16px;
-  background: var(--vp-c-bg-soft);
+  gap: 0px;
+  padding: 0px;
+  background: #fff0;
   border: 1px solid var(--vp-c-divider);
-  border-radius: 12px;
+  border-radius: 10px;
   text-decoration: none;
   transition: all 0.2s ease;
   overflow: hidden;
@@ -184,6 +184,7 @@ onMounted(() => {
 .bookmark-content {
   flex: 1;
   display: flex;
+  padding: 12px 14px;
   flex-direction: column;
   min-width: 0;
   gap: 8px;
@@ -215,7 +216,7 @@ onMounted(() => {
   align-items: center;
   gap: 8px;
   margin-top: auto;
-  padding-top: 8px;
+  padding-top: 0px;
 }
 
 .bookmark-favicon {
@@ -233,9 +234,9 @@ onMounted(() => {
 
 .bookmark-image-wrapper {
   flex-shrink: 0;
-  width: 120px;
-  height: 80px;
-  border-radius: 8px;
+  width: 200px;
+  height: 130px;
+  border-radius: 0px;
   overflow: hidden;
   background: var(--vp-c-bg);
 }
@@ -309,22 +310,22 @@ onMounted(() => {
 /* 移动端适配 */
 @media (max-width: 480px) {
   .bookmark-card {
-    padding: 12px;
-    gap: 12px;
+    padding: 0px;
+    gap: 0px;
   }
 
   .bookmark-image-wrapper {
     width: 80px;
-    height: 60px;
+    height: auto;
   }
 
   .bookmark-title {
-    font-size: 0.9rem;
+    font-size: 0.875rem;
   }
 
   .bookmark-description {
     font-size: 0.8rem;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 2;
   }
 
   .skeleton-image {

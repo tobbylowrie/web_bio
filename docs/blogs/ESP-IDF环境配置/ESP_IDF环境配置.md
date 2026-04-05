@@ -1,7 +1,9 @@
 ---
+title: 2026年 ESP-IDF 环境配置
 date: 2026-04-02
 description: ESP-IDF环境配置
 author: 深韩
+tags: [ESP32,ESP-IDF,教程]
 ---
 
 
@@ -22,7 +24,7 @@ OS：Ubuntu 22.04
 
 VSC 插件栏上搜索 ESP-IDF
 
-![7dcf960a-4e8f-4f8c-9996-c512245efed5](E:\workspaces\web_bio\docs\blogs\ESP-IDF环境配置\7dcf960a-4e8f-4f8c-9996-c512245efed5.png)
+![7dcf960a-4e8f-4f8c-9996-c512245efed5](./image-5.png)
 
 
 
@@ -32,9 +34,12 @@ VSC 插件栏上搜索 ESP-IDF
 
 [ESP-IDF Installation Manager Downloads](https://dl.espressif.cn/dl/eim/?tab=offline)
 
+<BookmarkCard url="https://dl.espressif.cn/dl/eim/?tab=offline" />
+
 这里我们选择需要的IDF版本并下载 Offline 版的 EIM，Offline 安装会将所有相关环境工具都下载下来，但是考虑到国内网络环境，这样安装是最省心的。
 
 ![a938b317-efd1-4246-a426-129ccb12495a](./a938b317-efd1-4246-a426-129ccb12495a.png)
+
 
 下载后进行安装
 
@@ -120,6 +125,8 @@ Hint: Try to add user into dialout or uucp group.
 这一般是串口没有权限，需要设置关于esp设备usb的udev配置
 
 [openocd-esp32/contrib/60-openocd.rules at master · espressif/openocd-esp32](https://github.com/espressif/openocd-esp32/blob/master/contrib/60-openocd.rules)
+
+<BookmarkCard url="https://github.com/espressif/openocd-esp32/blob/master/contrib/60-openocd.rules" />
 
 将上述文件下载或者创建并放入 /etc/udev/rules.d/60-openocd.rules 里
 

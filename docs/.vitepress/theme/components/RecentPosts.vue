@@ -312,7 +312,7 @@ onUnmounted(() => {
 }
 
 .post-group {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .group-header {
