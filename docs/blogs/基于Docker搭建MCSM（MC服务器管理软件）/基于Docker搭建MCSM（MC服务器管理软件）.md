@@ -13,7 +13,7 @@ author:
 sidebar: false
 aliases:
 description: 使用Docker Compose搭建MCSMinecraft服务器管理面板
-category: 游戏服务器
+category: HomeLab
 layout: doc
 ---
 # 基于Docker搭建MCSM（MC服务器管理软件）

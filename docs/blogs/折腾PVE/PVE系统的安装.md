@@ -13,7 +13,7 @@ author:
 sidebar: false
 aliases:
 description: PVE虚拟化平台的安装与配置教程
-category: 虚拟化
+category: HomeLab
 layout: doc
 ---
 

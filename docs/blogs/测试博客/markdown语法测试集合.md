@@ -2,7 +2,7 @@
 title: MarkDown 语法测试
 date: 2024-04-20
 time: 2024-04-20T12:00:00
-hide: false
+hide: true
 tags:
   - test
   - 测试
@@ -14,7 +14,7 @@ sidebar: false
 aliases:
   - test
 description: 测试文章
-category: 默认
+category: 测试
 layout: doc
 abab: abab
 list:

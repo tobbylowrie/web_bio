@@ -11,7 +11,7 @@ author:
 sidebar: false
 aliases:
 description: Linux系统下Node.js的手动安装与配置
-category: 开发环境
+category: 未分类
 layout: doc
 ---
 

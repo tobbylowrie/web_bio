@@ -12,7 +12,7 @@ author:
 sidebar: false
 aliases:
 description: 通过利用AI工具将2D角色转换为3D模型
-category: AI
+category: AIGC
 layout: doc
 ---
 
