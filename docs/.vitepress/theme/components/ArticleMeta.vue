@@ -70,7 +70,7 @@ onMounted(async () => {
           <line x1="3" y1="10" x2="21" y2="10"></line>
         </svg>
       </span>
-      <span class="meta-label">发布于</span>
+      <span class="meta-label">发布于:</span>
       <span class="meta-value">{{ formatDate(frontmatter.date) }}</span>
     </div>
 
@@ -82,7 +82,7 @@ onMounted(async () => {
           <circle cx="12" cy="7" r="4"></circle>
         </svg>
       </span>
-      <span class="meta-label">作者</span>
+      <span class="meta-label">作者:</span>
       <span class="meta-value">
         <template v-for="(author, index) in frontmatter.author" :key="index">
           <span v-if="index > 0" class="meta-separator">,</span>
@@ -98,7 +98,7 @@ onMounted(async () => {
           <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
         </svg>
       </span>
-      <span class="meta-label">分类</span>
+      <span class="meta-label">分类:</span>
       <span class="meta-value category">{{ frontmatter.category }}</span>
     </div>
 
@@ -110,7 +110,7 @@ onMounted(async () => {
           <line x1="7" y1="7" x2="7.01" y2="7"></line>
         </svg>
       </span>
-      <span class="meta-label">标签</span>
+      <span class="meta-label">标签:</span>
       <div class="tags-list">
         <span v-for="(tag, index) in frontmatter.tags" :key="index" class="tag">
           {{ tag }}
@@ -125,10 +125,10 @@ onMounted(async () => {
 .article-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px 24px;
-  padding: 1rem 0px;
-  margin-bottom: 24px;
-  border-bottom: 1px solid var(--vp-c-divider);
+  gap: 0.3rem 1.5rem;
+  padding: 1rem 0rem;
+  margin-bottom: 2rem;
+  /* border-bottom: 1px solid var(--vp-c-divider); */
   font-size: 14px;
   color: var(--vp-c-text-2);
 }
@@ -198,7 +198,6 @@ onMounted(async () => {
 @media (max-width: 640px) {
   .article-meta {
     flex-direction: column;
-    gap: 10px;
   }
   
   .tags-item {
