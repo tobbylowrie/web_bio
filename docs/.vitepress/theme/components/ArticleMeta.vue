@@ -41,7 +41,7 @@ function toggleExpand() {
 
 // 点击标签跳转到 blogs 页面并搜索
 function navigateToTag(tag: string) {
-  window.location.href = `/blogs.html?tag=${encodeURIComponent(tag)}`
+  window.open(`/blogs.html?search=${encodeURIComponent(tag)}`, '_blank')
 }
 
 // 在第一个 h1 后面插入元信息

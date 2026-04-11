@@ -152,11 +152,11 @@ const handleKeydown = (event) => {
 onMounted(() => {
   document.addEventListener('keydown', handleKeydown)
   
-  // 检查 URL 是否有 tag 参数
+  // 检查 URL 是否有 search 参数
   const urlParams = new URLSearchParams(window.location.search)
-  const tagParam = urlParams.get('tag')
-  if (tagParam) {
-    searchQuery.value = decodeURIComponent(tagParam)
+  const searchParam = urlParams.get('search')
+  if (searchParam) {
+    searchQuery.value = decodeURIComponent(searchParam)
   }
 })
 
