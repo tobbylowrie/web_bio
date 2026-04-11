@@ -76,27 +76,31 @@ onMounted(async () => {
     <div class="meta-row meta-row-primary">
       <!-- 日期 -->
       <div v-if="frontmatter.date" class="meta-item">
-        <span class="meta-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-            <line x1="16" y1="2" x2="16" y2="6"></line>
-            <line x1="8" y1="2" x2="8" y2="6"></line>
-            <line x1="3" y1="10" x2="21" y2="10"></line>
-          </svg>
-        </span>
-        <span class="meta-label">发布于:</span>
+        <div class="meta-label-wrapper">
+          <span class="meta-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </span>
+          <span class="meta-label">发布时间:</span>
+        </div>
         <span class="meta-value">{{ formatDate(frontmatter.date) }}</span>
       </div>
 
       <!-- 作者 -->
       <div v-if="frontmatter.author && frontmatter.author.length > 0" class="meta-item">
-        <span class="meta-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
-        </span>
-        <span class="meta-label">作者:</span>
+        <div class="meta-label-wrapper">
+          <span class="meta-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </span>
+          <span class="meta-label">作者:</span>
+        </div>
         <span class="meta-value">
           <template v-for="(author, index) in frontmatter.author" :key="index">
             <span v-if="index > 0" class="meta-separator">,</span>
@@ -112,7 +116,7 @@ onMounted(async () => {
         @click="toggleExpand"
         title="展开"
       >
-        <span class="expand-text">展开...</span>
+        <span class="expand-text">更多信息</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="6 9 12 15 18 9"></polyline>
         </svg>
@@ -124,24 +128,28 @@ onMounted(async () => {
       <div v-show="isExpanded" class="meta-collapsible-content">
         <!-- 分类 -->
         <div v-if="frontmatter.category" class="meta-item">
-          <span class="meta-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
-            </svg>
-          </span>
-          <span class="meta-label">分类:</span>
+          <div class="meta-label-wrapper">
+            <span class="meta-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </span>
+            <span class="meta-label">分类:</span>
+          </div>
           <span class="meta-value category">{{ frontmatter.category }}</span>
         </div>
 
         <!-- Tags -->
         <div v-if="frontmatter.tags && frontmatter.tags.length > 0" class="meta-item tags-item">
-          <span class="meta-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
-              <line x1="7" y1="7" x2="7.01" y2="7"></line>
-            </svg>
-          </span>
-          <span class="meta-label">标签:</span>
+          <div class="meta-label-wrapper">
+            <span class="meta-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                <line x1="7" y1="7" x2="7.01" y2="7"></line>
+              </svg>
+            </span>
+            <span class="meta-label">标签:</span>
+          </div>
           <div class="tags-list">
             <span v-for="(tag, index) in frontmatter.tags" :key="index" class="tag">
               {{ tag }}
@@ -181,12 +189,12 @@ onMounted(async () => {
   display: none;
 }
 
-/* 第一行容器 - 水平排列 */
+/* 第一行容器 - 水平排列，允许换行 */
 .meta-row-primary {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 1.5rem;
+  gap: 0.5rem 1.5rem;
 }
 
 /* 所有 meta-item 基础样式 */
@@ -197,17 +205,13 @@ onMounted(async () => {
   flex-shrink: 0;
 }
 
-/* 作者项允许收缩 */
-.meta-row-primary .meta-item:nth-child(2) {
-  flex-shrink: 1;
-  min-width: 0;
-  overflow: hidden;
+/* 可折叠区域内的 meta-item 增加间距 */
+.meta-collapsible-content .meta-item {
+  margin-bottom: 0.25rem;
 }
 
-.meta-row-primary .meta-item:nth-child(2) .meta-value {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.meta-collapsible-content .meta-item:last-of-type {
+  margin-bottom: 0;
 }
 
 /* 展开按钮 */
@@ -299,8 +303,15 @@ onMounted(async () => {
   color: var(--vp-c-brand-1);
 }
 
+.meta-label-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .meta-label {
   color: var(--vp-c-text-3);
+  white-space: nowrap;
 }
 
 .meta-value {
@@ -344,21 +355,10 @@ onMounted(async () => {
 }
 
 @media (max-width: 640px) {
-  /* 第一行在移动端保持水平不换行 */
+  /* 第一行在移动端允许换行 */
   .meta-row-primary {
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     width: 100%;
-  }
-  
-  .meta-row-primary .meta-item:nth-child(2) {
-    flex-shrink: 1;
-    min-width: 0;
-  }
-  
-  .meta-row-primary .meta-item:nth-child(2) .meta-value {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
   
   /* 可折叠区域保持单列 */
