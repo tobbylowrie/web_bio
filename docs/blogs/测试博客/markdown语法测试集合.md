@@ -1,8 +1,21 @@
 ---
 title: MarkDown 语法测试
-date: 2024-04-20 00:00:00
-hide: true
-tags: [test]
+date: 2024-04-20
+time: 2024-04-20T12:00:00
+hide: false
+tags:
+  - test
+  - 测试
+author:
+  - admin
+  - admin2
+  - 深韩
+sidebar: false
+aliases:
+  - test
+description: 测试文章
+category: 默认
+layout: doc
 ---
 这篇文章包含markdown语法基本的内容, 目的是放在自己的博客园上, 通过开发者控制台快速选中,  
 从而自定义自己博客园markdown样式.当然本文也可以当markdown语法学习之用.  
@@ -77,7 +90,7 @@ __This will also be bold__
 ```
 
 **实例**
-![头像](https://tobbylowrie.com/avatar.png)
+![头像](https://space.tobbylowrie.com/avatar.png)
 
 # 5. 超链接
 
@@ -161,3 +174,16 @@ $$
 \lim_{x \to 0} \frac{\sin x}{x} = 1 \\
 \lim_{x \to +\infty} (1 + \frac{1}{x})^x = e
 $$
+
+## 表格
+
+| 表头    | 值    | 值2  | 值3  | 备注  |
+| ----- | ---- | --- | --- | --- |
+| 项目名称1 | 项目值1 | 项目值 | 1   |     |
+| 项目名称2 | 项目值2 | 项目值 | 1   |     |
+| 项目名称3 | 项目值3 | 项目值 | 1   |     |
+| 项目名称4 | 项目值4 | 项目值 | 1   |     |
+|       |      |     |     |     |
+
+
+[[折腾香橙派zero2w]]

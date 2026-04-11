@@ -1,11 +1,19 @@
 ---
-
 title: Nodejs安装
 date: 2026-04-03
-description: Nodejs安装
-author: 深韩
-tags: [Node]
-
+time: 2026-04-03T12:00:00
+hide: false
+tags:
+  - Node
+  - Node.js
+  - 教程
+author:
+  - 深韩
+sidebar: false
+aliases:
+description: Linux系统下Node.js的手动安装与配置
+category: 开发环境
+layout: doc
 ---
 
 # Nodejs安装

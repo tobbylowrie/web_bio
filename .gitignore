@@ -52,3 +52,6 @@ logs/
 
 # VitePress local config
 *.local
+
+# Obsidian vault files
+.obsidian/

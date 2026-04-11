@@ -1,9 +1,21 @@
 ---
 title: 配置树莓派 Zero 2W 的 USB 口为虚拟串口 (ttyGS0)
 date: 2024-04-20
-description: 无
-author: [深韩] 
-tags: [树莓派,Raspberry,Raspberry Zero 2W,硬件,教程]
+time: 2024-04-20T12:00:00
+hide: false
+tags:
+  - 树莓派
+  - Raspberry
+  - Raspberry_Zero_2W
+  - 硬件
+  - 教程
+author:
+  - 深韩
+sidebar: false
+aliases:
+description: 树莓派 Zero 2W 配置 USB Gadget 虚拟串口教程
+category: 嵌入式
+layout: doc
 ---
 
 # 配置树莓派 Zero 2W 的 USB 口为虚拟串口 (ttyGS0)

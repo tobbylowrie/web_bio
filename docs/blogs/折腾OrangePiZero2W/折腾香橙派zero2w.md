@@ -1,10 +1,21 @@
 ---
-
 title: 折腾香橙派 Zero 2w
 date: 2026-03-30
-description: 折腾香橙派 Zero 2w
-author: 深韩
-
+time: 2026-03-30T12:00:00
+hide: false
+tags:
+  - 香橙派
+  - OrangePi
+  - 嵌入式
+  - 开发板
+  - 教程
+author:
+  - 深韩
+sidebar: false
+aliases:
+description: 香橙派 Zero 2W 的 Armbian 系统安装与配置教程
+category: 嵌入式
+layout: doc
 ---
 
 # 折腾香橙派 Zero 2w

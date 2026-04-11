@@ -1,9 +1,20 @@
 ---
 title: 2026年 ESP-IDF 环境配置
 date: 2026-04-02
-description: ESP-IDF环境配置
-author: 深韩
-tags: [ESP32,ESP-IDF,教程]
+time: 2026-04-02T12:00:00
+hide: false
+tags:
+  - ESP32
+  - ESP-IDF
+  - 嵌入式
+  - 教程
+author:
+  - 深韩
+sidebar: false
+aliases:
+description: ESP-IDF开发环境的配置与VSCode插件安装教程
+category: 嵌入式
+layout: doc
 ---
 
 

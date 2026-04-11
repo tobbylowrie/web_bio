@@ -1,8 +1,20 @@
-﻿---
+---
 title: PVE 系统的安装
-date: 2024-01-01 12:00:00
-description: 探索编程世界的第一步
-author: 深韩
+date: 2024-01-01
+time: 2024-01-01T12:00:00
+hide: false
+tags:
+  - PVE
+  - Proxmox
+  - 虚拟化
+  - 教程
+author:
+  - 深韩
+sidebar: false
+aliases:
+description: PVE虚拟化平台的安装与配置教程
+category: 虚拟化
+layout: doc
 ---
 
 # PVE 系统的安装

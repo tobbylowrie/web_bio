@@ -1,9 +1,20 @@
 ---
-title:  基于Docker搭建MCSM（MC服务器管理软件）
-date: 2024-01-01 12:00:00
-description: None
-author: 深韩
-tags: [Minecraft,软件,教程]
+title: 基于Docker搭建MCSM（MC服务器管理软件）
+date: 2024-01-01
+time: 2024-01-01T12:00:00
+hide: false
+tags:
+  - Minecraft
+  - Docker
+  - 软件
+  - 教程
+author:
+  - 深韩
+sidebar: false
+aliases:
+description: 使用Docker Compose搭建MCSMinecraft服务器管理面板
+category: 游戏服务器
+layout: doc
 ---
 # 基于Docker搭建MCSM（MC服务器管理软件）
 

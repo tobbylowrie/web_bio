@@ -1,11 +1,19 @@
-﻿---
+---
 title: 通过AI进行角色3D模型生成
-date: 2025-11-19 21:26:00
-description: 通过利用AI工具将2D角色转换为3D模型
-author: 深韩
+date: 2025-11-19
+time: 2025-11-19T12:00:00
+hide: false
+tags:
+  - AI生成
+  - 3D模型
+  - 教程
+author:
+  - 深韩
 sidebar: false
+aliases:
+description: 通过利用AI工具将2D角色转换为3D模型
+category: AI
 layout: doc
-tags: [AI生成,3D模型,教程]
 ---
 
 # 通过AI进行角色的3D模型生成
