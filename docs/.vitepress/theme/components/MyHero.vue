@@ -15,8 +15,10 @@
       </a>
       <div class="text-wrapper">
         <h1 class="title-text mt-3">
-          <strong><span ref="titleRef" id="title"></span></strong>
-          <span ref="titleCursorRef" class="typed-cursor"></span>
+          <strong class="typed-wrapper">
+            <span ref="titleRef" id="title"></span>
+            <span ref="titleCursorRef" class="typed-cursor"></span>
+          </strong>
         </h1>
         <!-- <ul class="links">
           <li
@@ -305,13 +307,20 @@ p {
   line-height: 1;
 }
 
+/* 打字机容器 */
+.typed-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
 /* 光标样式 */
 .typed-cursor {
   font-size: 2rem;
   color: var(--text-primary);
-  position: relative;
+  position: absolute;
+  left: 100%;
+  top: 0;
   margin-left: 2px;
-  vertical-align: baseline;
   animation: blink 0.7s infinite;
 }
 
