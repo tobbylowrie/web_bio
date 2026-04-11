@@ -31,6 +31,8 @@ import NotFound from './components/NotFound.vue'
 import ArticleMeta from './components/ArticleMeta.vue'
 // @ts-ignore: allow importing Vue SFCs without type declarations
 import AutoBookmark from './components/AutoBookmark.vue'
+// @ts-ignore: allow importing Vue SFCs without type declarations
+import GiscusComments from './components/GiscusComments.vue'
 // 引入模块 CSS
 import 'katex/dist/katex.min.css'
 
@@ -40,7 +42,7 @@ export default {
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
       // 'aside-outline-after': () => h(AsideOutlineAfter),
-      'doc-after': () => h('div', [h(ArticleMeta), h(AutoBookmark)]),
+      'doc-after': () => h('div', [h(ArticleMeta), h(AutoBookmark), h(GiscusComments)]),
       'doc-bottom': () => h(BackToTop),
       'not-found': () => h(NotFound)
     })
