@@ -4,8 +4,7 @@ date: 2026-04-03
 time: 2026-04-03T12:00:00
 hide: false
 tags:
-  - Node
-  - Node.js
+  - NodeJS
   - 教程
 author:
   - 深韩

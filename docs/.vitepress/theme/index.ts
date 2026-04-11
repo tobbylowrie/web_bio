@@ -29,6 +29,8 @@ import BookmarkCard from './components/BookmarkCard.vue'
 import NotFound from './components/NotFound.vue'
 // @ts-ignore: allow importing Vue SFCs without type declarations
 import ArticleMeta from './components/ArticleMeta.vue'
+// @ts-ignore: allow importing Vue SFCs without type declarations
+import AutoBookmark from './components/AutoBookmark.vue'
 // 引入模块 CSS
 import 'katex/dist/katex.min.css'
 
@@ -38,7 +40,7 @@ export default {
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
       // 'aside-outline-after': () => h(AsideOutlineAfter),
-      'doc-after': () => h(ArticleMeta),
+      'doc-after': () => h('div', [h(ArticleMeta), h(AutoBookmark)]),
       'doc-bottom': () => h(BackToTop),
       'not-found': () => h(NotFound)
     })
@@ -51,6 +53,7 @@ export default {
     app.component('HomeFooter', HomeFooter)
     app.component('LinkCards', LinkCards)
     app.component('BookmarkCard', BookmarkCard)
+    app.component('AutoBookmark', AutoBookmark)
     app.component('vImageViewer', vImageViewer);
 
     // 如果在客户端，初始化不蒜子统计
