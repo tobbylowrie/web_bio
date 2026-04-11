@@ -45,8 +45,6 @@ VSC 插件栏上搜索 ESP-IDF
 
 [ESP-IDF Installation Manager Downloads](https://dl.espressif.cn/dl/eim/?tab=offline)
 
-<BookmarkCard url="https://dl.espressif.cn/dl/eim/?tab=offline" />
-
 这里我们选择需要的IDF版本并下载 Offline 版的 EIM，Offline 安装会将所有相关环境工具都下载下来，但是考虑到国内网络环境，这样安装是最省心的。
 
 ![a938b317-efd1-4246-a426-129ccb12495a](./a938b317-efd1-4246-a426-129ccb12495a.png)
@@ -136,8 +134,6 @@ Hint: Try to add user into dialout or uucp group.
 这一般是串口没有权限，需要设置关于esp设备usb的udev配置
 
 [openocd-esp32/contrib/60-openocd.rules at master · espressif/openocd-esp32](https://github.com/espressif/openocd-esp32/blob/master/contrib/60-openocd.rules)
-
-<BookmarkCard url="https://github.com/espressif/openocd-esp32/blob/master/contrib/60-openocd.rules" />
 
 将上述文件下载或者创建并放入 /etc/udev/rules.d/60-openocd.rules 里
 

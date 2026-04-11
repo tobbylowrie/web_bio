@@ -1,1 +1,2 @@
 - BookmarkCard.vue 使用的是api.microlink.io API 对国内网站优化不太好
+- 文章页：标题应该始终能被看见

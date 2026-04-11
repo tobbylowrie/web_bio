@@ -2,7 +2,7 @@
 title: MarkDown 语法测试
 date: 2024-04-20
 time: 2024-04-20T12:00:00
-hide: true
+hide: false
 tags:
   - test
   - 测试
@@ -17,7 +17,7 @@ description: 测试文章
 category: 默认
 layout: doc
 abab: abab
-list: 
+list:
   - aaa
   - bbb
   - ccc
@@ -196,3 +196,5 @@ $$
 
 
 [[折腾香橙派zero2w]]
+
+<a href="https://www.busuanzi.cc/count.php?search=www.busuanzi.cc" title="不蒜子统计" target="_blank"> <img style="width:85px;height:25px;" src="https://www.busuanzi.cc/static/images/bsz-tongji.png"> </a>
