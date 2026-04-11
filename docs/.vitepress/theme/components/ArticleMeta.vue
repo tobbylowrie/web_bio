@@ -1,13 +1,22 @@
 <script setup lang="ts">
 import { useData } from 'vitepress'
 import { useRoute } from 'vitepress'
-import { onMounted, ref, nextTick } from 'vue'
+import { onMounted, ref, nextTick, computed } from 'vue'
 
 const { frontmatter } = useData()
 const route = useRoute()
 const containerRef = ref<HTMLElement | null>(null)
 const isInserted = ref(false)
 const isExpanded = ref(false)
+
+// 标准元数据字段列表
+const standardFields = ['title', 'date', 'time', 'hide', 'tags', 'author', 'sidebar', 'aliases', 'description', 'category', 'layout']
+
+// 获取自定义元数据字段（非标准字段）
+const customFields = computed(() => {
+  if (!frontmatter.value) return []
+  return Object.keys(frontmatter.value).filter(key => !standardFields.includes(key))
+})
 
 // 格式化日期
 function formatDate(date: string | undefined): string {
@@ -28,10 +37,11 @@ function hasMeta(): boolean {
     frontmatter.value.tags)
 }
 
-// 检查是否有可折叠的信息（分类或标签）
+// 检查是否有可折叠的信息（分类、标签或自定义字段）
 function hasCollapsibleInfo(): boolean {
   return !!(frontmatter.value.category || 
-    (frontmatter.value.tags && frontmatter.value.tags.length > 0))
+    (frontmatter.value.tags && frontmatter.value.tags.length > 0) ||
+    customFields.value.length > 0)
 }
 
 // 切换折叠状态
@@ -166,6 +176,35 @@ onMounted(async () => {
               {{ tag }}
             </span>
           </div>
+        </div>
+
+        <!-- 自定义元数据字段 -->
+        <div 
+          v-for="field in customFields" 
+          :key="field" 
+          class="meta-item"
+        >
+          <div class="meta-label-wrapper">
+            <span class="meta-icon custom-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+            </span>
+            <span class="meta-label">{{ field }}:</span>
+          </div>
+          <span class="meta-value">
+            <template v-if="Array.isArray(frontmatter[field])">
+              <template v-for="(item, index) in frontmatter[field]" :key="index">
+                <span v-if="index > 0" class="meta-separator">,</span>
+                {{ item }}
+              </template>
+            </template>
+            <template v-else>
+              {{ frontmatter[field] }}
+            </template>
+          </span>
         </div>
 
         <!-- 收起按钮 -->
@@ -314,6 +353,10 @@ onMounted(async () => {
   color: var(--vp-c-brand-1);
 }
 
+.meta-icon.custom-icon {
+  color: var(--vp-c-text-3);
+}
+
 .meta-label-wrapper {
   display: flex;
   align-items: center;
@@ -351,7 +394,7 @@ onMounted(async () => {
 
 .tag {
   display: inline-block;
-  padding: 2px 10px;
+  padding: 0px 10px;
   background: var(--vp-c-brand-soft);
   color: var(--vp-c-brand-1);
   border-radius: 12px;
