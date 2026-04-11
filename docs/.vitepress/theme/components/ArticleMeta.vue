@@ -72,7 +72,7 @@ onMounted(async () => {
     class="article-meta"
     :class="{ 'is-inserted': isInserted }"
   >
-    <!-- 第一行：日期、作者、折叠按钮 -->
+    <!-- 第一行：日期、作者、展开按钮 -->
     <div class="meta-row meta-row-primary">
       <!-- 日期 -->
       <div v-if="frontmatter.date" class="meta-item">
@@ -105,15 +105,14 @@ onMounted(async () => {
         </span>
       </div>
 
-      <!-- 折叠按钮 -->
+      <!-- 展开按钮（仅在未展开时显示） -->
       <button 
-        v-if="hasCollapsibleInfo()"
+        v-if="hasCollapsibleInfo() && !isExpanded"
         class="expand-btn"
-        :class="{ 'is-expanded': isExpanded }"
         @click="toggleExpand"
-        :title="isExpanded ? '收起' : '展开'"
+        title="展开"
       >
-        <span class="expand-text">{{ isExpanded ? '收起' : '展开...' }}</span>
+        <span class="expand-text">展开...</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="6 9 12 15 18 9"></polyline>
         </svg>
@@ -122,7 +121,7 @@ onMounted(async () => {
 
     <!-- 可折叠区域：分类、标签 -->
     <Transition name="expand">
-      <div v-show="isExpanded" class="meta-row meta-row-collapsible">
+      <div v-show="isExpanded" class="meta-collapsible-content">
         <!-- 分类 -->
         <div v-if="frontmatter.category" class="meta-item">
           <span class="meta-icon">
@@ -149,6 +148,18 @@ onMounted(async () => {
             </span>
           </div>
         </div>
+
+        <!-- 收起按钮 -->
+        <button 
+          class="collapse-btn"
+          @click="toggleExpand"
+          title="收起"
+        >
+          <span class="collapse-text">收起</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+          </svg>
+        </button>
       </div>
     </Transition>
   </div>
@@ -170,22 +181,40 @@ onMounted(async () => {
   display: none;
 }
 
-/* 行容器 */
-.meta-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem 1.5rem;
-  align-items: center;
-}
-
+/* 第一行容器 - 水平排列 */
 .meta-row-primary {
-  justify-content: flex-start;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 1.5rem;
 }
 
-/* 折叠按钮 */
+/* 所有 meta-item 基础样式 */
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* 作者项允许收缩 */
+.meta-row-primary .meta-item:nth-child(2) {
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.meta-row-primary .meta-item:nth-child(2) .meta-value {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 展开按钮 */
 .expand-btn {
   display: flex;
   align-items: center;
+  gap: 4px;
   padding: 2px 8px;
   background: transparent;
   border: 1px solid var(--vp-c-divider);
@@ -193,7 +222,8 @@ onMounted(async () => {
   color: var(--vp-c-text-2);
   cursor: pointer;
   transition: all 0.2s ease;
-  /* font-size: 12px; */
+  font-size: 12px;
+  flex-shrink: 0;
 }
 
 .expand-btn:hover {
@@ -202,22 +232,45 @@ onMounted(async () => {
   border-color: var(--vp-c-brand-1);
 }
 
-.expand-text {
-  white-space: nowrap;
-}
-
 .expand-btn svg {
   transition: transform 0.2s ease;
   flex-shrink: 0;
 }
 
-.expand-btn.is-expanded svg {
-  transform: rotate(180deg);
+/* 可折叠内容区域 - 单列垂直排列 */
+.meta-collapsible-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
 }
 
-/* 可折叠区域 */
-.meta-row-collapsible {
-  padding-top: 0rem;
+/* 收起按钮 */
+.collapse-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  margin-top: 0.5rem;
+  background: transparent;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 4px;
+  color: var(--vp-c-text-2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 12px;
+  align-self: flex-start;
+}
+
+.collapse-btn:hover {
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-brand-1);
+  border-color: var(--vp-c-brand-1);
+}
+
+.collapse-btn svg {
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
 }
 
 /* 折叠动画 */
@@ -232,19 +285,12 @@ onMounted(async () => {
   opacity: 0;
   max-height: 0;
   padding-top: 0;
-  padding-bottom: 0;
 }
 
 .expand-enter-to,
 .expand-leave-from {
   opacity: 1;
-  max-height: 200px;
-}
-
-.meta-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  max-height: 300px;
 }
 
 .meta-icon {
@@ -272,8 +318,7 @@ onMounted(async () => {
 }
 
 .tags-item {
-  align-items: center;
-  width: 100%;
+  align-items: flex-start;
 }
 
 .tags-list {
@@ -299,21 +344,26 @@ onMounted(async () => {
 }
 
 @media (max-width: 640px) {
-  .meta-row {
+  /* 第一行在移动端保持水平不换行 */
+  .meta-row-primary {
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+  
+  .meta-row-primary .meta-item:nth-child(2) {
+    flex-shrink: 1;
+    min-width: 0;
+  }
+  
+  .meta-row-primary .meta-item:nth-child(2) .meta-value {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* 可折叠区域保持单列 */
+  .meta-collapsible-content {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-  
-  .expand-btn {
-    /* margin-left: 0;
-    align-self: flex-end; */
-  }
-  
-  .tags-item {
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
   }
 }
 </style>
