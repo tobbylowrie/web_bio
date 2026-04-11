@@ -73,74 +73,155 @@ onMounted(() => {
     })
   }, 100)
 
-      // 文字打字机效果
-      setTimeout(() => {
-        if (!titleRef.value || !titleCursorRef.value) return
-  
-        const el = titleRef.value
-        const cursor = titleCursorRef.value
-        const texts = ['你好', '我叫深韩', '欢迎来到我的主页']
-        let textIndex = 0
-        let charIndex = 0
-        let isDeleting = false
-        let isWaiting = false
-        const typeSpeed = 80
-        const pauseTime = 2000
-  
-        // 初始化光标
-        cursor.textContent = '_'
-        cursor.style.visibility = 'visible'
-  
-        function type() {
-          const currentText = texts[textIndex]
-  
-          if (isWaiting) {
-            return
-          }
-  
-          if (isDeleting) {
-            // 删除模式：清空文本准备下一段
-            el.textContent = ''
-            isDeleting = false
-            textIndex++
-            charIndex = 0
-            isWaiting = true
-            setTimeout(() => {
-              isWaiting = false
-              type()
-            }, 200)
-            return
-          }
-  
-          // 打字模式
-          if (charIndex < currentText.length) {
-            el.textContent = currentText.slice(0, charIndex + 1)
-            charIndex++
-            setTimeout(type, typeSpeed)
-          } else {
-            // 当前文本打完
-            el.textContent = currentText
-  
-            if (textIndex < texts.length - 1) {
-              // 还有下一段，暂停2s后进入删除模式
-              isWaiting = true
-              setTimeout(() => {
-                isWaiting = false
-                isDeleting = true
-                type()
-              }, pauseTime)
-            } else {
-              // 最后一段打完，3秒后隐藏光标
-              setTimeout(() => {
-                cursor.style.visibility = 'hidden'
-              }, 3000)
+          // 文字打字机效果
+
+          setTimeout(() => {
+
+            if (!titleRef.value || !titleCursorRef.value) return
+
+      
+
+            const el = titleRef.value
+
+            const cursor = titleCursorRef.value
+
+            const texts = ['你好', '我叫深韩', '欢迎来到我的主页']
+
+            let textIndex = 0
+
+            let charIndex = 0
+
+            let isDeleting = false
+
+            let isWaiting = false
+
+            const typeSpeed = 80
+
+            const deleteSpeed = 50
+
+            const pauseTime = 2000
+
+      
+
+            // 初始化光标
+
+            cursor.textContent = '_'
+
+            cursor.style.visibility = 'visible'
+
+      
+
+            function type() {
+
+              const currentText = texts[textIndex]
+
+      
+
+              if (isWaiting) {
+
+                return
+
+              }
+
+      
+
+              if (isDeleting) {
+
+                // 删除模式：逐个字符删除
+
+                if (charIndex > 0) {
+
+                  charIndex--
+
+                  el.textContent = currentText.slice(0, charIndex)
+
+                  setTimeout(type, deleteSpeed)
+
+                } else {
+
+                  // 删除完成，准备打下一段
+
+                  el.textContent = ''
+
+                  isDeleting = false
+
+                  textIndex++
+
+                  isWaiting = true
+
+                  setTimeout(() => {
+
+                    isWaiting = false
+
+                    type()
+
+                  }, 200)
+
+                }
+
+                return
+
+              }
+
+      
+
+              // 打字模式
+
+              if (charIndex < currentText.length) {
+
+                el.textContent = currentText.slice(0, charIndex + 1)
+
+                charIndex++
+
+                setTimeout(type, typeSpeed)
+
+              } else {
+
+                // 当前文本打完
+
+                el.textContent = currentText
+
+      
+
+                if (textIndex < texts.length - 1) {
+
+                  // 还有下一段，暂停2s后进入删除模式
+
+                  isWaiting = true
+
+                  setTimeout(() => {
+
+                    isWaiting = false
+
+                    isDeleting = true
+
+                    type()
+
+                  }, pauseTime)
+
+                } else {
+
+                  // 最后一段打完，3秒后隐藏光标
+
+                  setTimeout(() => {
+
+                    cursor.style.visibility = 'hidden'
+
+                  }, 3000)
+
+                }
+
+              }
+
             }
-          }
-        }
-  
-        // 开始打字
-        type()
-      }, 200)})
+
+      
+
+            // 开始打字
+
+            type()
+
+          }, 200)})
 </script>
 
 <style scoped>
