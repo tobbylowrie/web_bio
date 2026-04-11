@@ -18,10 +18,6 @@
           <strong><span ref="titleRef" id="title"></span></strong>
           <span ref="titleCursorRef" class="typed-cursor"></span>
         </h1>
-        <p class="discribe-text mt-1">
-          <span ref="descRef" id="desc"></span>
-          <span ref="descCursorRef" class="typed-cursor"></span>
-        </p>
         <!-- <ul class="links">
           <li
             v-for="(link, index) in links"
@@ -56,14 +52,10 @@ const links = [
 // refs
 const avatarRef = ref<HTMLImageElement>()
 const titleRef = ref<HTMLSpanElement>()
-const descRef = ref<HTMLSpanElement>()
 const titleCursorRef = ref<HTMLSpanElement>()
-const descCursorRef = ref<HTMLSpanElement>()
 const buttonRefs = ref<HTMLAnchorElement[]>([])
 
-const cursorChar = '|'
-const CURSOR_HIDE_DELAY = 1000
-const DESC_CURSOR_HIDE_DELAY = 3000
+const cursorChar = '_'
 const BUTTON_STAGGER_DELAY = 200
 
 onMounted(() => {
@@ -81,47 +73,74 @@ onMounted(() => {
     })
   }, 100)
 
-  // 文字打字机效果
-  setTimeout(() => {
-    if (!titleRef.value) return
-
-    new Typed(titleRef.value, {
-      strings: ['你好, 我是深韩'],
-      typeSpeed: 50,
-      showCursor: false, // 使用自定义光标
-      onComplete: () => {
-        // 隐藏标题光标
-        setTimeout(() => {
-          if (titleCursorRef.value) {
-            titleCursorRef.value.style.display = 'none'
+      // 文字打字机效果
+      setTimeout(() => {
+        if (!titleRef.value || !titleCursorRef.value) return
+  
+        const el = titleRef.value
+        const cursor = titleCursorRef.value
+        const texts = ['你好', '我叫深韩', '欢迎来到我的主页']
+        let textIndex = 0
+        let charIndex = 0
+        let isDeleting = false
+        let isWaiting = false
+        const typeSpeed = 80
+        const pauseTime = 2000
+  
+        // 初始化光标
+        cursor.textContent = '_'
+        cursor.style.visibility = 'visible'
+  
+        function type() {
+          const currentText = texts[textIndex]
+  
+          if (isWaiting) {
+            return
           }
-        }, CURSOR_HIDE_DELAY)
-
-        // 标题完成后开始描述文字
-        if (!descRef.value) return
-
-        new Typed(descRef.value, {
-          strings: ['欢迎你来到我的个人主页'],
-          typeSpeed: 40,
-          showCursor: false, // 使用自定义光标
-          onComplete: () => {
-            // 隐藏描述光标
+  
+          if (isDeleting) {
+            // 删除模式：清空文本准备下一段
+            el.textContent = ''
+            isDeleting = false
+            textIndex++
+            charIndex = 0
+            isWaiting = true
             setTimeout(() => {
-              if (descCursorRef.value) {
-                descCursorRef.value.style.display = 'none'
-              }
-            }, DESC_CURSOR_HIDE_DELAY)
+              isWaiting = false
+              type()
+            }, 200)
+            return
           }
-        })
-      }
-    })
-
-    // 手动触发光标闪烁动画
-    if (titleCursorRef.value) {
-      titleCursorRef.value.textContent = cursorChar
-    }
-  }, 200)
-})
+  
+          // 打字模式
+          if (charIndex < currentText.length) {
+            el.textContent = currentText.slice(0, charIndex + 1)
+            charIndex++
+            setTimeout(type, typeSpeed)
+          } else {
+            // 当前文本打完
+            el.textContent = currentText
+  
+            if (textIndex < texts.length - 1) {
+              // 还有下一段，暂停2s后进入删除模式
+              isWaiting = true
+              setTimeout(() => {
+                isWaiting = false
+                isDeleting = true
+                type()
+              }, pauseTime)
+            } else {
+              // 最后一段打完，3秒后隐藏光标
+              setTimeout(() => {
+                cursor.style.visibility = 'hidden'
+              }, 3000)
+            }
+          }
+        }
+  
+        // 开始打字
+        type()
+      }, 200)})
 </script>
 
 <style scoped>
@@ -210,15 +229,9 @@ p {
   font-size: 2rem;
   color: var(--text-primary);
   position: relative;
-  margin-left: 5px;
+  margin-left: 2px;
   vertical-align: baseline;
   animation: blink 0.7s infinite;
-}
-
-.discribe-text .typed-cursor {
-  font-size: 1.5rem;
-  color: var(--text-secondary);
-  margin-left: 3px;
 }
 
 /* 光标闪烁动画 */
