@@ -126,7 +126,7 @@ onMounted(async () => {
   display: flex;
   flex-wrap: wrap;
   gap: 12px 24px;
-  padding: 16px 0 24px;
+  padding: 1rem 0px;
   margin-bottom: 24px;
   border-bottom: 1px solid var(--vp-c-divider);
   font-size: 14px;
@@ -170,6 +170,8 @@ onMounted(async () => {
 
 .tags-item {
   align-items: flex-start;
+  width: 100%;
+  margin-top: 8px;
 }
 
 .tags-list {
