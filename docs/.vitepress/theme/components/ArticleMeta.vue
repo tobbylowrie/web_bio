@@ -169,9 +169,8 @@ onMounted(async () => {
 }
 
 .tags-item {
-  align-items: flex-start;
+  align-items: center;
   width: 100%;
-  margin-top: 8px;
 }
 
 .tags-list {
@@ -203,8 +202,9 @@ onMounted(async () => {
   }
   
   .tags-item {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
   }
 }
 </style>
