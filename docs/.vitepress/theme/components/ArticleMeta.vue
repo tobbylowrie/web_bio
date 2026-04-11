@@ -39,6 +39,11 @@ function toggleExpand() {
   isExpanded.value = !isExpanded.value
 }
 
+// 点击标签跳转到 blogs 页面并搜索
+function navigateToTag(tag: string) {
+  window.location.href = `/blogs.html?tag=${encodeURIComponent(tag)}`
+}
+
 // 在第一个 h1 后面插入元信息
 onMounted(async () => {
   // 只对博客文章生效
@@ -151,7 +156,13 @@ onMounted(async () => {
             <span class="meta-label">标签:</span>
           </div>
           <div class="tags-list">
-            <span v-for="(tag, index) in frontmatter.tags" :key="index" class="tag">
+            <span 
+              v-for="(tag, index) in frontmatter.tags" 
+              :key="index" 
+              class="tag"
+              @click="navigateToTag(tag)"
+              title="点击搜索此标签"
+            >
               {{ tag }}
             </span>
           </div>
@@ -347,6 +358,7 @@ onMounted(async () => {
   font-size: 12px;
   font-weight: 500;
   transition: all 0.2s;
+  cursor: pointer;
 }
 
 .tag:hover {
