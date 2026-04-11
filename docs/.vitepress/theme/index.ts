@@ -27,6 +27,8 @@ import LinkCards from './components/LinkCards.vue'
 // @ts-ignore: allow importing Vue SFCs without type declarations
 import BookmarkCard from './components/BookmarkCard.vue'
 import NotFound from './components/NotFound.vue'
+// @ts-ignore: allow importing Vue SFCs without type declarations
+import ArticleMeta from './components/ArticleMeta.vue'
 // 引入模块 CSS
 import 'katex/dist/katex.min.css'
 
@@ -36,6 +38,7 @@ export default {
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
       // 'aside-outline-after': () => h(AsideOutlineAfter),
+      'doc-after': () => h(ArticleMeta),
       'doc-bottom': () => h(BackToTop),
       'not-found': () => h(NotFound)
     })
