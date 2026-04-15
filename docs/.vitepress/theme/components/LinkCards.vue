@@ -1,57 +1,30 @@
 <template>
-  <div class="link-cards-container">
-    <a
-      v-for="(card, index) in cards"
-      :key="index"
-      :href="card.href"
-      class="card-link"
-    >
-      <div class="card-image-wrapper">
-        <div class="card-bg-square"></div>
-        <img
-          :src="card.image"
-          :alt="card.title"
-          class="card-image no-viewer"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-      <h3 class="card-title">{{ card.title }}</h3>
-    </a>
-  </div>
+  <a :href="href" class="card-link">
+    <div class="card-image-wrapper">
+      <div class="card-bg-square"></div>
+      <img
+        :src="image"
+        :alt="title"
+        class="card-image no-viewer"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+    <h3 class="card-title">{{ title }}</h3>
+  </a>
 </template>
 
 <script setup lang="ts">
-interface Card {
+interface Props {
   title: string
   image: string
   href: string
 }
 
-const cards: Card[] = [
-  {
-    title: '博客',
-    image: '/全部文章_透明背景.png',
-    href: '/blogs/'
-  },
-  {
-    title: '音乐收藏',
-    image: '/音乐收藏_透明背景.png',
-    href: '/music/'
-  }
-]
+defineProps<Props>()
 </script>
 
 <style scoped>
-.link-cards-container {
-  display: flex;
-  justify-content: center;
-  gap: 48px;
-  padding: 20px;
-  margin-top: 20px;
-  margin-bottom: 40px;
-}
-
 .card-link {
   display: flex;
   flex-direction: column;
@@ -114,11 +87,4 @@ const cards: Card[] = [
   transition: transform .3s ease;
 }
 
-@media (max-width: 640px) {
-  .link-cards-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-  }
-}
 </style>
