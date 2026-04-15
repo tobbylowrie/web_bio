@@ -162,10 +162,11 @@
   border-top: none;
 }
 
-/* LinkCards wrapper styles */
-.link-cards-wrapper {
+/* HeroLinkIcon wrapper styles */
+.hero-link-icon-wrapper {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 48px;
   padding: 20px;
   margin-top: 20px;
@@ -173,7 +174,7 @@
 }
 
 @media (max-width: 640px) {
-  .link-cards-wrapper {
+  .hero-link-icon-wrapper {
     flex-direction: column;
     align-items: center;
     gap: 32px;

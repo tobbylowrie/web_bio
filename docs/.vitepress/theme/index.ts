@@ -23,7 +23,7 @@ import AsideOutlineAfter from './components/aside-outline-after.vue'
 // @ts-ignore: allow importing Vue SFCs without type declarations
 import HomeFooter from './components/HomeFooter.vue'
 // @ts-ignore: allow importing Vue SFCs without type declarations
-import LinkCards from './components/LinkCards.vue'
+import HeroLinkIcon from './components/HeroLinkIcon.vue'
 // @ts-ignore: allow importing Vue SFCs without type declarations
 import BookmarkCard from './components/BookmarkCard.vue'
 import NotFound from './components/NotFound.vue'
@@ -53,7 +53,7 @@ export default {
     app.component('RecentPosts', RecentPosts)
     app.component('BackToTop', BackToTop)
     app.component('HomeFooter', HomeFooter)
-    app.component('LinkCards', LinkCards)
+    app.component('HeroLinkIcon', HeroLinkIcon)
     app.component('BookmarkCard', BookmarkCard)
     app.component('AutoBookmark', AutoBookmark)
     app.component('vImageViewer', vImageViewer);
