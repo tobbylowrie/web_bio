@@ -99,14 +99,19 @@ onMounted(() => {
 
 <template>
   <div class="bookmark-card-container">
-    <!-- 加载状态 -->
+    <!-- 加载状态 - 骨架屏 -->
     <div v-if="loading" class="bookmark-card loading">
       <div class="bookmark-content">
         <div class="skeleton-title"></div>
         <div class="skeleton-desc"></div>
-        <div class="skeleton-domain"></div>
+        <div class="skeleton-footer">
+          <div class="skeleton-favicon"></div>
+          <div class="skeleton-domain"></div>
+        </div>
       </div>
-      <div class="skeleton-image"></div>
+      <div class="skeleton-image-wrapper">
+        <div class="skeleton-image"></div>
+      </div>
     </div>
 
     <!-- 错误状态 - 显示基础链接 -->
@@ -251,20 +256,22 @@ onMounted(() => {
 /* 加载状态骨架屏 */
 .bookmark-card.loading {
   pointer-events: none;
+  /* background: var(--vp-c-bg-soft); */
 }
 
 .skeleton-title,
 .skeleton-desc,
 .skeleton-domain,
-.skeleton-image {
+.skeleton-image,
+.skeleton-favicon {
   background: linear-gradient(
     90deg,
-    var(--vp-c-bg-mute) 25%,
-    var(--vp-c-bg-soft) 50%,
-    var(--vp-c-bg-mute) 75%
+    var(--vp-c-bg-soft) 0%,
+    var(--vp-c-bg) 50%,
+    var(--vp-c-bg-soft) 100%
   );
   background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
+  animation: shimmer 1.5s linear infinite;
   border-radius: 4px;
 }
 
@@ -278,15 +285,39 @@ onMounted(() => {
   height: 32px;
 }
 
+.skeleton-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.skeleton-favicon {
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
 .skeleton-domain {
   width: 40%;
   height: 16px;
 }
 
+.skeleton-image-wrapper {
+  flex-shrink: 0;
+  width: 200px;
+  height: 130px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .skeleton-image {
-  width: 120px;
-  height: 80px;
-  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
 }
 
 @keyframes shimmer {
@@ -322,6 +353,12 @@ onMounted(() => {
   .bookmark-description {
     font-size: 0.8rem;
     -webkit-line-clamp: 2;
+  }
+
+  .skeleton-image-wrapper {
+    width: 80px;
+    height: auto;
+    min-height: 60px;
   }
 
   .skeleton-image {
