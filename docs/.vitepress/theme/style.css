@@ -75,7 +75,9 @@
   --vp-c-danger-3: var(--vp-c-red-3);
   --vp-c-danger-soft: var(--vp-c-red-soft);
 
-  --lowrie-c-icon-bg: #ffeee0;;
+  --lowrie-c-icon-bg: #ffeee0;
+  --shimmer-color-1: #e3e3e3;
+  --shimmer-color-2: #f6f6f6;
 }
 
 .dark {
@@ -89,6 +91,9 @@
   --vp-c-divider: #4F505A;
 
   --lowrie-c-icon-bg: #7c6552;
+
+  --shimmer-color-1: #3f4048;
+  --shimmer-color-2: #4f505a;
   
 }
 /**

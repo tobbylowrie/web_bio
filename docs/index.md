@@ -16,5 +16,4 @@ layout: home
   <HeroLinkIcon title="音乐收藏" image="/音乐收藏_透明背景.png" href="/music/" />
 </div>
 
-
 <HomeFooter />

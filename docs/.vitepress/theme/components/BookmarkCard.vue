@@ -266,12 +266,12 @@ onMounted(() => {
 .skeleton-favicon {
   background: linear-gradient(
     90deg,
-    var(--vp-c-bg-soft) 0%,
-    var(--vp-c-bg) 50%,
-    var(--vp-c-bg-soft) 100%
+    var(--shimmer-color-1) 0%,
+    var(--shimmer-color-2)  55%,
+    var(--shimmer-color-1) 100%
   );
   background-size: 200% 100%;
-  animation: shimmer 1.5s linear infinite;
+  animation: shimmer 5s linear infinite;
   border-radius: 4px;
 }
 
@@ -363,7 +363,6 @@ onMounted(() => {
 
   .skeleton-image {
     width: 80px;
-    height: 60px;
   }
 }
 </style>
