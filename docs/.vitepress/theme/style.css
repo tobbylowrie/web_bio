@@ -44,6 +44,9 @@
  * -------------------------------------------------------------------------- */
 
 :root {
+  --vp-c-brand-1: #ff7906;
+  --vp-c-brand-2: #ff79067a;
+  --vp-c-brand-soft: #ff79062b;
 
   --vp-c-bg: #ffffff;
   --vp-c-bg-alt: #f6f6f7;
@@ -57,7 +60,6 @@
   --vp-c-default-3: var(--vp-c-gray-3);
   --vp-c-default-soft: var(--vp-c-gray-soft);
 
-  --vp-c-brand-1: #874fd6;
   --vp-c-brand: var(--vp-c-brand-1);
 
   --vp-c-tip-1: var(--vp-c-brand-1);
@@ -81,7 +83,7 @@
 }
 
 .dark {
-  --vp-c-brand-1: #bd93f9;
+  --vp-c-brand-1: #d56503;
 
   --vp-c-bg: #282a36;
   --vp-c-bg-alt: #1C1D24;
@@ -165,6 +167,10 @@
 
 .vp-doc h2{
   border-top: none;
+}
+
+.vp-doc a:hover {
+  color: var(--vp-c-brand-2);
 }
 
 /* HeroLinkIcon wrapper styles */

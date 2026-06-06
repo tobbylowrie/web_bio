@@ -87,7 +87,7 @@ onMounted(() => {
 
             const cursor = titleCursorRef.value
 
-            const texts = ['你好', '我叫深韩', '欢迎来到我的主页']
+            const texts = ['你好', '我是深韩', '很高兴认识你','欢迎来到我的主页，随便看看吧']
 
             let textIndex = 0
 
@@ -397,8 +397,6 @@ p {
   transition: opacity 0.96s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     transform 0.96s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   border-radius: 50%;
-  border: 1px solid rgba(127, 78, 45, 0.2);
-  box-shadow: 0 0 0 1px rgba(127, 78, 45, 0.15);
   background-color: var(--bg-color);
 }
 
